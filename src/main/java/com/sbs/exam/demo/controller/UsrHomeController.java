@@ -4,8 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lombok.Data;
+
+@Data
 @Controller
 public class UsrHomeController {
+	private int count = 0;
 	@RequestMapping("/usr/home/main")
 	@ResponseBody
 	public String showMain() {
@@ -20,6 +24,11 @@ public class UsrHomeController {
 	@ResponseBody
 	public String showMain3() {
 		return "잘가세요";
+	}
+	@RequestMapping("/usr/home/main4")
+	@ResponseBody
+	public int showMain4() {
+		return count++;
 	}
 	
 }
