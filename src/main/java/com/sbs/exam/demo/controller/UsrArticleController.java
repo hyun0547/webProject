@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sbs.exam.demo.vo.Article;
 
-import lombok.Data;
-
 @Controller
 public class UsrArticleController {
 	//인스턴스 변수
@@ -30,12 +28,16 @@ public class UsrArticleController {
 		}
 	}
 	private Article getArticle(int id) {
-		for(Article article : articles) {
-			if(article.getId() == id) {
-				return article;
+		Article article = null;
+		if(id > articles.size()) {
+			return null;
+		}
+		for(int i = id - 1; i >= 0; i--) {
+			if(articles.get(i).getId() == id) {
+				article = articles.get(i);
 			}
 		}
-		return null;
+		return article;
 	}
 	//액션 메소드
 	@RequestMapping("/usr/article/getArticles")
@@ -70,7 +72,16 @@ public class UsrArticleController {
 		}
 		article.setTitle(title);
 		article.setBody(body);
-		return id + "번 글이 변경되었습니다.";
+		return id + "번 글이 변경되었습니다. </br> " + article.toString();
+	}
+	@RequestMapping("/usr/article/doGetArticle")
+	@ResponseBody
+	public String doGetArticle (int id) {
+		Article article = getArticle(id);
+		if(article == null) {
+			return "게시글이 존재하지 않습니다.";
+		}
+		return article.toString();
 	}
 	
 	
