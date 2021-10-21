@@ -11,10 +11,19 @@ import com.sbs.exam.demo.vo.Article;
 
 @Service
 public class ArticleService {
-	@Autowired
 	ArticleRepository repository;
 	
-	public ArticleService() {}
+	public ArticleService(ArticleRepository repository) {
+		this.repository = repository;
+		makeTest();
+	}
+	public void makeTest() {
+		for(int i = 1; i <= 10; i++) {
+			String title = "제목" + i;
+			String body = "내용" + i;
+			doAdd(title, body);
+		}
+	}
 	
 	public ArrayList<Article> getArticles() {
 		return repository.getArticles();
