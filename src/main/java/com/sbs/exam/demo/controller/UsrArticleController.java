@@ -23,9 +23,8 @@ public class UsrArticleController {
 	}
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
-	public String doAdd (String title, String body) {
-		service.doAdd(title, body);
-		return "게시물이 추가되었습니다.";
+	public Article doAdd (String title, String body) {
+		return service.doAdd(title, body);
 	}
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
@@ -47,9 +46,6 @@ public class UsrArticleController {
 	@ResponseBody
 	public Object doGetArticle (int id) {
 		Article article = service.getArticle(id);
-		if(article == null) {
-			return "게시글이 존재하지 않습니다.";
-		}
 		return article;
 	}
 	

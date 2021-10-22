@@ -28,4 +28,7 @@ public interface ArticleRepository {
 		
 		@Update("UPDATE ARTICLE SET UPDATEDATE = NOW(), TITLE=#{title}, BODY = #{body} WHERE ID = #{id}")
 		public boolean doModify(@Param("id") int id,@Param("title") String title,@Param("body") String body);
+		
+		@Select("SELECT LAST_INSERT_ID()")
+		public int getLastInsert();
 }

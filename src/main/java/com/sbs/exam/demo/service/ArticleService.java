@@ -3,8 +3,6 @@ package com.sbs.exam.demo.service;
 
 import java.util.ArrayList;
 
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
 
 import com.sbs.exam.demo.repository.ArticleRepository;
@@ -24,8 +22,10 @@ public class ArticleService {
 	public Article getArticle(int id) {
 		return repository.getArticle(id);
 	}
-	public void doAdd(String title, String body) {
+	public Article doAdd(String title, String body) {
 		repository.doAdd(title, body);
+		int id = repository.getLastInsert();
+		return repository.getArticle(id);
 	}
 	public boolean doDelete(int id) {
 		return repository.doDelete(id);
@@ -33,6 +33,5 @@ public class ArticleService {
 	public boolean doModify(int id, String title, String body) {
 		return repository.doModify(id, title, body);
 	}
-	
 	
 }
