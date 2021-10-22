@@ -1,19 +1,35 @@
-DROP TABLE ARTICLE;
+# DB 생성
+DROP DATABASE IF EXISTS sbs_s_2021_10;
+CREATE DATABASE sbs_s_2021_10_t;
+USE sbs_s_2021_10_t;
 
-CREATE TABLE ARTICLE(
-	ID NUMBER(10) NOT NULL PRIMARY KEY,
-	REGDATE DATE NOT NULL,
-	UPDATEDATE DATE NOT NULL,
-	TITLE VARCHAR2(100) NOT NULL,
-	BODY CLOB NOT NULL
+# 게시물 테이블 생성
+CREATE TABLE article (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    title CHAR(100) NOT NULL,
+    `body` TEXT NOT NULL
 );
 
-CREATE SEQUENCE ARTICLE_ID_SEQ
-INCREMENT BY 1
-START WITH 1
-MINVALUE 1
-MAXVALUE 9999;
+# 게시물 테스트 데이터 생성
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+title = '제목1',
+`body` = '내용1';
 
-INSERT INTO ARTICLE
-VALUES (ARTICLE_ID_SEQ.NEXTVAL, SYSDATE, SYSDATE, '테스트', '테스트');
-COMMIT;
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+title = '제목2',
+`body` = '내용2';
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+title = '제목3',
+`body` = '내용3';
+
+SELECT * 
+FROM article;

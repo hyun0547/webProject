@@ -3,6 +3,8 @@ package com.sbs.exam.demo.service;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
 
 import com.sbs.exam.demo.repository.ArticleRepository;
@@ -14,14 +16,6 @@ public class ArticleService {
 	
 	public ArticleService(ArticleRepository repository) {
 		this.repository = repository;
-		makeTest();
-	}
-	public void makeTest() {
-		for(int i = 1; i <= 10; i++) {
-			String title = "제목" + i;
-			String body = "내용" + i;
-			doAdd(title, body);
-		}
 	}
 	
 	public ArrayList<Article> getArticles() {
