@@ -1,9 +1,7 @@
 package com.sbs.exam.demo.repository;
 
 import java.util.ArrayList;
-
 import org.springframework.stereotype.Component;
-
 import com.sbs.exam.demo.vo.Article;
 
 @Component
@@ -15,9 +13,6 @@ public class ArticleRepository {
 			lastId = 0;
 			articles = new ArrayList<>();
 		}
-	
-		
-		
 		
 		public Article getArticle(int id) {
 			for(Article article : articles) {

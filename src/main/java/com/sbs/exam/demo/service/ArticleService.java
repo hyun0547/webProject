@@ -3,7 +3,6 @@ package com.sbs.exam.demo.service;
 
 import java.util.ArrayList;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sbs.exam.demo.repository.ArticleRepository;
