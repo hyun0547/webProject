@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.sbs.exam.demo.repository.ArticleRepository">
+	
+	<select id="getArticle" resultType="Article">
+		SELECT * FROM ARTICLE WHERE ID = #{id}
+	</select>
+	
+	<select id="getArticles" resultType="Article">
+		SELECT * FROM ARTICLE ORDER BY ID DESC
+	</select>
+	
+	<select id="getLastInsert" resultType="Article">
+		SELECT LAST_INSERT_ID()
+	</select>
+	
+	<select id="doSearch" resultType="Article">
+		SELECT * FROM ARTICLE 
+		WHERE TITLE LIKE CONCAT('%', #{keyword}, '%')  
+		OR BODY LIKE CONCAT('%', #{keyword}, '%')
+	</select>
+	
+	<insert id="doAdd">
+		INSERT INTO ARTICLE 
+		SET REGDATE = NOW(), 
+		UPDATEDATE = NOW(), 
+		TITLE = #{title}, 
+		BODY = #{body}
+	</insert>
+	
+	<delete id="doDelete">
+		DELETE FROM ARTICLE 
+		WHERE ID = #{id}
+	</delete>
+	
+	<update id="doModify">
+		UPDATE ARTICLE 
+		SET UPDATEDATE = NOW(), 
+		TITLE=#{title}, 
+		BODY = #{body} 
+		WHERE ID = #{id}
+	</update>
+
+</mapper>

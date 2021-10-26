@@ -42,8 +42,8 @@ public class UsrArticleController {
 	}
 	@RequestMapping("/usr/article/doSearch")
 	@ResponseBody
-	public ArrayList<Article> doSearch (String keyward) {
-		return service.doSearch(keyward);
+	public ArrayList<Article> doSearch (String keyword) {
+		return service.doSearch(keyword);
 	}
 	
 	
