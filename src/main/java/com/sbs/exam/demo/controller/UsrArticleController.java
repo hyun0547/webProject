@@ -18,8 +18,7 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/getArticles")
 	@ResponseBody
 	public ArrayList<Article> getArticles () {
-		ArrayList<Article> articles = service.getArticles();
-		return articles;
+		return service.getArticles();
 	}
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
@@ -29,24 +28,22 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
 	public String doDelete (int id) {
-		if(service.doDelete(id)) {
-			return id + "번 글이 삭제되었습니다.";
-		}
-		return "게시글이 존재하지 않습니다.";
+		return service.doDelete(id);
 	}
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
 	public String doModify (int id, String title, String body) {
-		if(service.doModify(id, title, body)) {
-			return id + "번 글이 변경되었습니다. </br> ";
-		}
-		return "존재하지 않는 글 입니다.";
+		return service.doModify(id, title, body);
 	}
 	@RequestMapping("/usr/article/doGetArticle")
 	@ResponseBody
-	public Object doGetArticle (int id) {
-		Article article = service.getArticle(id);
-		return article;
+	public Article doGetArticle (int id) {
+		return service.getArticle(id);
+	}
+	@RequestMapping("/usr/article/doSearch")
+	@ResponseBody
+	public ArrayList<Article> doSearch (String keyward) {
+		return service.doSearch(keyward);
 	}
 	
 	
