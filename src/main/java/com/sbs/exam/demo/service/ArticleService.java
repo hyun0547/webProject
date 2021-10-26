@@ -28,16 +28,16 @@ public class ArticleService {
 		return repository.getArticle(id);
 	}
 	public String doDelete(int id) {
-		if(repository.doDelete(id) < 0) {
-			return "해당 게시글은 존재하지 않습니다.";
+		if(repository.doDelete(id) > 0) {
+			return "게시글이 삭제 되었습니다.";
 		}
-		return "삭제 되었습니다.";
+		return "해당 게시글은 존재하지 않습니다.";
 	}
 	public String doModify(int id, String title, String body) {
-		if(repository.doModify(id, title, body) < 0) {
-			return "해당 게시글은 존재하지 않습니다."; 
+		if(repository.doModify(id, title, body) > 0) {
+			return "게시글이 수정 되었습니다.";
 		}
-		return "게시글이 수정 되었습니다.";
+		return "해당 게시글은 존재하지 않습니다."; 
 	}
 	public ArrayList<Article> doSearch(String keyword) {
 		return repository.doSearch(keyword);

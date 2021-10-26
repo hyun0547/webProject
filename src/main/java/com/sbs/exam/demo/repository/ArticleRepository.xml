@@ -36,10 +36,16 @@
 	</delete>
 	
 	<update id="doModify">
-		UPDATE ARTICLE 
-		SET UPDATEDATE = NOW(), 
-		TITLE=#{title}, 
-		BODY = #{body} 
+		UPDATE ARTICLE
+		<set>
+			UPDATEDATE = NOW(), 
+			<if test="title != null and title != ''">
+				TITLE=#{title}, 
+			</if>
+			<if test="body != null and body != ''">
+				BODY = #{body} 
+			</if>
+		</set> 
 		WHERE ID = #{id}
 	</update>
 
