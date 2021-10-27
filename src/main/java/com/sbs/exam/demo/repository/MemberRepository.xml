@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.sbs.exam.demo.repository.MemberRepository">
+
+	<insert id="doJoin">
+			INSERT INTO `sbs_s_2021_10`.`member` 
+		(
+		`regDate`, 
+		`updateDate`, 
+		`loginId`, 
+		`loginPw`, 
+		`name`, 
+		`nickname`, 
+		`cellphoneNo`, 
+		`email`
+		)
+		VALUES
+		(
+		NOW(), 
+		NOW(), 
+		#{loginId}, 
+		#{loginPw},  
+		#{name}, 
+		#{nickname}, 
+		#{cellphoneNo}, 
+		#{email}
+		)
+	</insert>
+
+</mapper>

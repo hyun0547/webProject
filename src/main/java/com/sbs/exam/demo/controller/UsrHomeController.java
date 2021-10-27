@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.Data;
 
-@Data
 @Controller
 public class UsrHomeController {
 	private int count = 0;
