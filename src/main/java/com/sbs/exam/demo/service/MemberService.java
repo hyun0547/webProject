@@ -1,8 +1,8 @@
 package com.sbs.exam.demo.service;
 
 import org.springframework.stereotype.Service;
-
 import com.sbs.exam.demo.repository.MemberRepository;
+import com.sbs.exam.demo.vo.Member;
 
 @Service
 public class MemberService {
@@ -12,10 +12,10 @@ public class MemberService {
 		this.repository = repository;
 	}
 
-	public String doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo,
+	public Member doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo,
 			String email) {
 		repository.doJoin(loginId, loginPw, name, nickname, cellphoneNo, email);
-		return "가입 성공";
+		return repository.getMember(repository.getLastInsertId());
 	}
 
 }

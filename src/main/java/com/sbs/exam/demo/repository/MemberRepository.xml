@@ -28,5 +28,13 @@
 		#{email}
 		)
 	</insert>
+	
+	<select id="getLastInsertId" resultType="int">
+		SELECT LAST_INSERT_ID()
+	</select>
+	
+	<select id="getMember" resultType="com.sbs.exam.demo.vo.Member">
+		SELECT * FROM `member` WHERE ID = #{id}
+	</select>
 
 </mapper>
