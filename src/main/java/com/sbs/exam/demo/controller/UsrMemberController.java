@@ -17,7 +17,7 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public Member doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo, String email) {
+	public Object doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo, String email) {
 		return service.doJoin(loginId, loginPw, name, nickname, cellphoneNo, email);
 	}
 	

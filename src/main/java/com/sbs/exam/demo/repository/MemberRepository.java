@@ -15,4 +15,6 @@ public interface MemberRepository {
 
 	public int getLastInsertId();
 
+	public int checkOverlap(@Param("loginId") String loginId);
+
 }

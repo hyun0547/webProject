@@ -12,8 +12,11 @@ public class MemberService {
 		this.repository = repository;
 	}
 
-	public Member doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo,
+	public Object doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo,
 			String email) {
+		if(repository.checkOverlap(loginId) > 0) {
+			return "중복된 아이디 입니다.";
+		}
 		repository.doJoin(loginId, loginPw, name, nickname, cellphoneNo, email);
 		return repository.getMember(repository.getLastInsertId());
 	}
