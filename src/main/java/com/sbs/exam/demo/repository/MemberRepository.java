@@ -15,6 +15,9 @@ public interface MemberRepository {
 
 	public int getLastInsertId();
 
-	public int checkOverlap(@Param("loginId") String loginId);
+	public int loginIdOverlap(@Param("loginId") String loginId);
 
+	public int emailOverlap(@Param("email") String email);
+
+	public int userOverlap(@Param("name") String name,@Param("cellphoneNo") String cellphoneNo);
 }

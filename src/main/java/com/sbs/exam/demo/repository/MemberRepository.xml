@@ -37,8 +37,17 @@
 		SELECT * FROM `member` WHERE ID = #{id}
 	</select>
 	
-	<select id="checkOverlap" resultType="int">
+	<select id="loginIdOverlap" resultType="int">
 		SELECT COUNT(*) FROM `member` WHERE loginId = #{loginId}
 	</select>
+	
+	<select id="emailOverlap" resultType="int">
+		SELECT COUNT(*) FROM `member` WHERE email = #{email}
+	</select>
+	
+	<select id="userOverlap" resultType="int">
+		SELECT COUNT(*) FROM `member` WHERE `name` = #{name} AND cellphoneNo = #{cellphoneNo}
+	</select>
+	
 
 </mapper>
