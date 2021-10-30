@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 
 import com.sbs.exam.demo.repository.ArticleRepository;
+import com.sbs.exam.demo.util.Utility;
 import com.sbs.exam.demo.vo.Article;
 import com.sbs.exam.demo.vo.ResultData;
 
@@ -20,28 +21,35 @@ public class ArticleService {
 	public ResultData getArticles() {
 		return ResultData.from("S-1", "전체 게시물 입니다.", repository.getArticles());
 	}
-	public Article getArticle(int id) {
-		return repository.getArticle(id);
+	public ResultData getArticle(int id) {
+		if(repository.getArticle(id) != null) {
+			return ResultData.from("S-1", Utility.f("%d번 게시물 입니다.", id), repository.getArticle(id));
+		}
+		return ResultData.from("F-1", Utility.f("%d번 게시물은 존재하지 않습니다.", id));
 	}
-	public Article doAdd(String title, String body) {
+	public ResultData doAdd(String title, String body) {
 		repository.doAdd(title, body);
 		int id = repository.getLastInsert();
-		return repository.getArticle(id);
+		return ResultData.from("S-1", "게시물이 추가되었습니다.", repository.getArticle(id));
 	}
-	public String doDelete(int id) {
+	public ResultData doDelete(int id) {
 		if(repository.doDelete(id) > 0) {
-			return "게시글이 삭제 되었습니다.";
+			return ResultData.from("S-1", "게시물이 삭제 되었습니다.");
 		}
-		return "해당 게시글은 존재하지 않습니다.";
+		return ResultData.from("F-1", Utility.f("%d번 게시물은 존재하지 않습니다.", id));
 	}
-	public String doModify(int id, String title, String body) {
+	public ResultData doModify(int id, String title, String body) {
 		if(repository.doModify(id, title, body) > 0) {
-			return "게시글이 수정 되었습니다.";
+			return ResultData.from("S-1", Utility.f("%d번 게시물이 변경 되었습니다.", id), repository.getArticle(id));
 		}
-		return "해당 게시글은 존재하지 않습니다."; 
+		return ResultData.from("F-1", Utility.f("%d번 게시물은 존재하지 않습니다.", id)); 
 	}
-	public ArrayList<Article> doSearch(String keyword) {
-		return repository.doSearch(keyword);
+	public ResultData doSearch(String keyword) {
+		ArrayList<Article> articles = repository.doSearch(keyword); 
+		if(articles != null) {
+			return ResultData.from("S-1", Utility.f("%s (으)로 검색한 결과 입니다.", keyword), articles);
+		}
+		return ResultData.from("F-1", Utility.f("%s (을)를 포함하는 게시물이 존재하지 않습니다.", keyword));
 	}
 	
 }

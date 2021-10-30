@@ -21,6 +21,10 @@ public class ResultData {
 		return rd;
 	}
 	
+	public static ResultData from(String rc, String msg) {
+		return from(rc, msg, null);
+	}
+	
 	
 	
 	public boolean isSuccess() {
