@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.sbs.exam.demo.repository.ArticleRepository;
 import com.sbs.exam.demo.vo.Article;
+import com.sbs.exam.demo.vo.ResultData;
 
 @Service
 public class ArticleService {
@@ -16,8 +17,8 @@ public class ArticleService {
 		this.repository = repository;
 	}
 	
-	public ArrayList<Article> getArticles() {
-		return repository.getArticles();
+	public ResultData getArticles() {
+		return ResultData.from("S-1", "전체 게시물 입니다.", repository.getArticles());
 	}
 	public Article getArticle(int id) {
 		return repository.getArticle(id);

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.sbs.exam.demo.service.ArticleService;
 import com.sbs.exam.demo.vo.Article;
+import com.sbs.exam.demo.vo.ResultData;
 
 @Controller
 public class UsrArticleController {
@@ -17,7 +18,7 @@ public class UsrArticleController {
 	//액션 메소드
 	@RequestMapping("/usr/article/getArticles")
 	@ResponseBody
-	public ArrayList<Article> getArticles () {
+	public ResultData getArticles () {
 		return service.getArticles();
 	}
 	@RequestMapping("/usr/article/doAdd")
