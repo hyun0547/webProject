@@ -34,7 +34,7 @@
 	</select>
 	
 	<select id="getMember" resultType="com.sbs.exam.demo.vo.Member">
-		SELECT * FROM `member` WHERE ID = #{id}
+		SELECT * FROM `member` WHERE loginId = #{loginId}
 	</select>
 	
 	<select id="loginIdOverlap" resultType="int">
@@ -49,5 +49,4 @@
 		SELECT COUNT(*) FROM `member` WHERE `name` = #{name} AND cellphoneNo = #{cellphoneNo}
 	</select>
 	
-
 </mapper>
