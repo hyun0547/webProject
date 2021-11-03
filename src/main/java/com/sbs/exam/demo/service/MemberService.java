@@ -29,7 +29,6 @@ public class MemberService {
 		
 		repository.doJoin(loginId, loginPw, name, nickname, cellphoneNo, email);
 		Member member = repository.getMember(loginId);
-		System.out.println(member);
 		return ResultData.from("S-1", "가입에 성공했습니다.", member);
 	}
 
@@ -40,15 +39,10 @@ public class MemberService {
 			return ResultData.from("F-1", "존재하지 않는 아이디 입니다.");
 		}
 		else if(member.getLoginPw().equals(loginPw)) {
-			session.setAttribute("loginedMemberId", loginId);
+			session.setAttribute("loginedMember", member);
 			return ResultData.from("S-1", Utility.f("%s님 안녕하세요", member.getNickname()), member);
 		}
 		return ResultData.from("F-2", "비밀번호를 확인해 주세요");
-	}
-
-	public ResultData<Member> logout(HttpSession session) {
-		session.removeAttribute("loginedMemberId");
-		return ResultData.from("S-1", "로그아웃 되었습니다.");
 	}
 
 }

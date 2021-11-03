@@ -31,8 +31,7 @@ updateDate = NOW(),
 title = '제목3',
 `body` = '내용3';
 
-SELECT * 
-FROM article;
+
 
 CREATE TABLE `member` (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -95,3 +94,14 @@ INSERT INTO `sbs_s_2021_10`.`member`
 	'01012345679', 
 	'testUser2@daum.net'
 	);
+
+# 게시물 작성자 추가
+ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER updatedate;
+
+# 기존 게시글 작성자 member2번으로 설정
+UPDATE article SET memberId = 2 WHERE memberId = 0;
+	
+SELECT * FROM `member`;
+
+SELECT * 
+FROM article;

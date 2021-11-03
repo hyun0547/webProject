@@ -43,9 +43,9 @@ public class UsrMemberController {
 	@RequestMapping("/usr/member/login")
 	@ResponseBody
 	public ResultData<Member> login(HttpSession session, String loginId, String loginPw){
-		String loginedMember = (String) session.getAttribute("loginedMemberId");
+		Member loginedMember = (Member) session.getAttribute("loginedMember");
 		if(loginedMember != null) {
-			return ResultData.from("F-3", Utility.f("이미 %s 계정으로 로그인 되어 있습니다.", loginedMember));
+			return ResultData.from("F-3", Utility.f("이미 %s 계정으로 로그인 되어 있습니다.", loginedMember.getLoginId()));
 		};
 		
 		return service.login(session, loginId, loginPw);
@@ -53,12 +53,13 @@ public class UsrMemberController {
 	@RequestMapping("/usr/member/logout")
 	@ResponseBody
 	public ResultData<Member> logout(HttpSession session){
-		String loginedMember = (String) session.getAttribute("loginedMemberId");
+		Member loginedMember = (Member) session.getAttribute("loginedMember");
 		if(loginedMember == null) {
 			return ResultData.from("F-1","현재 로그인 되어있는 계정이 없습니다.");
 		};
 		
-		return service.logout(session);
+		session.removeAttribute("loginedMember");
+		return ResultData.from("S-1", "로그아웃 되었습니다.");
 	}
 	
 	

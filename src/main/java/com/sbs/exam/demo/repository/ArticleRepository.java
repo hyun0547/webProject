@@ -22,7 +22,7 @@ public interface ArticleRepository {
 		
 		public ArrayList<Article> doSearch(@Param("keyword") String keyword);
 		
-		public void doAdd(@Param("title") String title,@Param("body") String body);
+		public void doAdd(@Param("title") String title,@Param("body") String body, @Param("memberId") int memberId);
 		
 		public int doDelete(@Param("id") int id);
 		

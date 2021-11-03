@@ -27,7 +27,8 @@
 		SET REGDATE = NOW(), 
 		UPDATEDATE = NOW(), 
 		TITLE = #{title}, 
-		BODY = #{body}
+		BODY = #{body}, 
+		MEMBERID = #{memberId}
 	</insert>
 	
 	<delete id="doDelete">
