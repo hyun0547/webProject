@@ -18,15 +18,15 @@ public interface ArticleRepository {
 		
 		public ArrayList<Article> getArticles();
 		
-		public int getLastInsert();
-		
 		public ArrayList<Article> doSearch(@Param("keyword") String keyword);
+		
+		public int getLastInsert();
 		
 		public void doAdd(@Param("title") String title,@Param("body") String body, @Param("memberId") int memberId);
 		
-		public int doDelete(@Param("id") int id);
+		public void doDelete(@Param("id") int id);
 		
-		public int doModify(@Param("id") int id,@Param("title") String title,@Param("body") String body);
+		public void doModify(@Param("id") int id,@Param("title") String title,@Param("body") String body);
 		
 }
 		
