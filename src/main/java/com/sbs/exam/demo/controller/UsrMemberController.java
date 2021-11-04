@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.sbs.exam.demo.service.MemberService;
@@ -22,14 +23,14 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public ResultData<Member> doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo, String email) {
+	public ResultData<Member> doJoin(@ModelAttribute Member newMember ) {
 		HashMap<String, String> joinParam = new HashMap<>();
-		joinParam.put("loginId", loginId);
-		joinParam.put("loginPw", loginPw);
-		joinParam.put("name", name);
-		joinParam.put("nickname", nickname);
-		joinParam.put("cellphoneNo", cellphoneNo);
-		joinParam.put("email", email);
+		joinParam.put("loginId", newMember.getLoginId());
+		joinParam.put("loginPw", newMember.getLoginPw());
+		joinParam.put("name", newMember.getName());
+		joinParam.put("nickname", newMember.getNickname());
+		joinParam.put("cellphoneNo", newMember.getCellphoneNo());
+		joinParam.put("email", newMember.getEmail());
 		
 		Iterator<String> keys = joinParam.keySet().iterator();
 		while(keys.hasNext() ){
@@ -38,7 +39,7 @@ public class UsrMemberController {
 				return ResultData.from("F-1", Utility.f("%s 값을 입력하세요", key));
 			}
 		}
-		return service.doJoin(loginId, loginPw, name, nickname, cellphoneNo, email);
+		return service.doJoin(newMember);
 	}
 	@RequestMapping("/usr/member/login")
 	@ResponseBody

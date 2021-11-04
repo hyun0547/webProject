@@ -15,21 +15,20 @@ public class MemberService {
 		this.repository = repository;
 	}
 
-	public ResultData<Member> doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo,
-			String email) {
-		if(repository.loginIdOverlap(loginId) > 0) {
-			return ResultData.from("F-2", Utility.f("%s (은)는 중복된 아이디 입니다.", loginId));
+	public ResultData<Member> doJoin(Member newMember) {
+		if(repository.loginIdOverlap(newMember.getLoginId()) > 0) {
+			return ResultData.from("F-2", Utility.f("%s (은)는 중복된 아이디 입니다.", newMember.getLoginId()));
 		}
-		if(repository.emailOverlap(email) > 0) {
-			return ResultData.from("F-2", Utility.f("%s (은)는 이미 가입된 이메일 입니다.", email));
+		if(repository.emailOverlap(newMember.getEmail()) > 0) {
+			return ResultData.from("F-2", Utility.f("%s (은)는 이미 가입된 이메일 입니다.", newMember.getEmail()));
 		}
-		if(repository.userOverlap(name, cellphoneNo) > 3) {
+		if(repository.userOverlap(newMember.getName(), newMember.getCellphoneNo()) > 3) {
 			return ResultData.from("F-3", "한 사람당 최대 3개의 계정만 생성 할 수 있습니다.");
 		}
 		
-		repository.doJoin(loginId, loginPw, name, nickname, cellphoneNo, email);
-		Member member = repository.getMember(loginId);
-		return ResultData.from("S-1", "가입에 성공했습니다.", member);
+		repository.doJoin(newMember.getLoginId(), newMember.getLoginPw(), newMember.getName(), newMember.getNickname(), newMember.getCellphoneNo(), newMember.getEmail());
+		Member joinedMember = repository.getMember(newMember.getLoginId());
+		return ResultData.from("S-1", "가입에 성공했습니다.", joinedMember);
 	}
 
 	public ResultData<Member> login(HttpSession session, String loginId, String loginPw) {
