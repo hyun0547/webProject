@@ -28,7 +28,7 @@ public class MemberService {
 		
 		repository.doJoin(newMember.getLoginId(), newMember.getLoginPw(), newMember.getName(), newMember.getNickname(), newMember.getCellphoneNo(), newMember.getEmail());
 		Member joinedMember = repository.getMember(newMember.getLoginId());
-		return ResultData.from("S-1", "가입에 성공했습니다.", joinedMember);
+		return ResultData.from("S-1", "가입에 성공했습니다.", joinedMember.getClass().getSimpleName(), joinedMember);
 	}
 
 	public ResultData<Member> login(HttpSession session, String loginId, String loginPw) {
@@ -39,7 +39,7 @@ public class MemberService {
 		}
 		else if(member.getLoginPw().equals(loginPw)) {
 			session.setAttribute("loginedMember", member);
-			return ResultData.from("S-1", Utility.f("%s님 안녕하세요", member.getNickname()), member);
+			return ResultData.from("S-1", Utility.f("%s님 안녕하세요", member.getNickname()), member.getClass().getSimpleName(), member);
 		}
 		return ResultData.from("F-2", "비밀번호를 확인해 주세요");
 	}
