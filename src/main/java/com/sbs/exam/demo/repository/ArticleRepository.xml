@@ -28,7 +28,7 @@
 		UPDATEDATE = NOW(), 
 		TITLE = #{title}, 
 		BODY = #{body}, 
-		MEMBERID = #{memberId}
+		MEMBERID = #{memberLoginId}
 	</insert>
 	
 	<delete id="doDelete">

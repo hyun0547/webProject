@@ -96,10 +96,10 @@ INSERT INTO `sbs_s_2021_10`.`member`
 	);
 
 # 게시물 작성자 추가
-ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER updatedate;
+ALTER TABLE article ADD COLUMN memberLoginId VARCHAR(20) NOT NULL AFTER updatedate;
 
-# 기존 게시글 작성자 member2번으로 설정
-UPDATE article SET memberId = 2 WHERE memberId = 0;
+# 기존 게시글 작성자 testUser1번으로 설정
+UPDATE article SET memberLoginId = 'testUser1' WHERE memberLoginId = '';
 	
 SELECT * FROM `member`;
 

@@ -38,7 +38,7 @@ public class ArticleService {
 		Article article = repository.getArticle(id);
 		
 		if(article != null) {
-			if(article.getMemberId() == member.getId()) {
+			if(article.getMemberLoginId().equals(member.getLoginId())) {
 				repository.doDelete(id);
 				return ResultData.from("S-1", Utility.f("게시물이 삭제 되었습니다.", id), id.getClass().getSimpleName(), id);
 			}
@@ -50,7 +50,7 @@ public class ArticleService {
 		Article article = repository.getArticle(id);
 		
 		if(article != null) {
-			if(article.getMemberId() == member.getId()) {
+			if(article.getMemberLoginId().equals(member.getLoginId())) {
 				repository.doModify(id, title, body);
 				return ResultData.from("S-1", Utility.f("%d번 게시물이 변경 되었습니다.", id), article.getClass().getSimpleName(), article);
 			}
