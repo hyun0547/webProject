@@ -3,6 +3,7 @@ package com.sbs.exam.demo.controller;
 import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.sbs.exam.demo.service.ArticleService;
@@ -17,10 +18,10 @@ public class UsrArticleController {
 		this.service = service;
 	}
 	
-	@RequestMapping("/usr/article/getArticles")
-	@ResponseBody
-	public ResultData<ArrayList<Article>> getArticles () {
-		return service.getArticles();
+	@RequestMapping("/usr/article/list")
+	public String getArticles (Model model) {
+		model.addAttribute("rd", service.getArticles());
+		return "/usr/article/list";
 	}
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody

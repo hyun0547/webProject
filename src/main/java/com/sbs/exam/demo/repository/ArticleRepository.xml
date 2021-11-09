@@ -39,7 +39,9 @@
 	<update id="doModify">
 		UPDATE ARTICLE
 		<set>
-			UPDATEDATE = NOW(), 
+			<if test="title != null and title != '' or body != null and body != ''">
+				UPDATEDATE = NOW(), 
+			</if>
 			<if test="title != null and title != ''">
 				TITLE=#{title}, 
 			</if>
