@@ -7,3 +7,15 @@
 *{
 	font-family: 'GmarketSansMedium';
 }
+
+
+.table-box1 *{
+	text-align: end;
+}
+.table-box1 > table tr th,
+.table-box1 > table tr td
+{
+	border-top:1px solid gray;
+	border-bottom:1px solid gray;
+	padding: 10px;
+}
