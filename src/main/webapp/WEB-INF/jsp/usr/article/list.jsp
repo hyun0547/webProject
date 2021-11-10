@@ -18,18 +18,24 @@
 	<section class="mt-5">
 		<div class="container mx-auto px-3 table-box1">
 			<table class="w-full">
+				<colgroup>
+					<col width="3%"/>
+					<col width="67%"/>
+					<col width="15%"/>
+					<col width="15%"/>
+				</colgroup>
 				<tr>
 					<th>No</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
+					<th class="text-center">제목</th>
+					<th class="text-right">작성자</th>
+					<th class="text-right">작성일</th>
 				</tr>
 				<c:forEach var="article" items="${rd.data1}">
 					<tr>
-						<td>${article.id}</td>
-						<td>${article.title}</td>
-						<td>${article.memberLoginId}</td>
-						<td>
+						<td class="text-center">${article.id}</td>
+						<td class="text-center"><a href="/usr/article/detail?id=${article.id}">${article.title}</a></td>
+						<td class="text-right">${article.memberLoginId}</td>
+						<td class="text-right">
 							<fmt:parseDate var="parsedDate" value="${article.regDate}" pattern="yyyy-mm-dd HH:mm:ss"/>
 							<fmt:formatDate var="newFormattedDateString" value="${parsedDate}" pattern="yyyy/MM/dd"/> 
 							${newFormattedDateString}

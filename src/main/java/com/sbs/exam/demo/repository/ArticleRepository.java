@@ -1,13 +1,10 @@
 package com.sbs.exam.demo.repository;
 
 import java.util.ArrayList;
+import java.util.Map;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 import com.sbs.exam.demo.vo.Article;
 
@@ -27,6 +24,8 @@ public interface ArticleRepository {
 		public void doDelete(@Param("id") int id);
 		
 		public void doModify(@Param("id") int id,@Param("title") String title,@Param("body") String body);
+		
+		public Map<String, String> detail(@Param("id") int id);
 		
 }
 		

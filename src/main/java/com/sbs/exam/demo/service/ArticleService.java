@@ -2,6 +2,8 @@ package com.sbs.exam.demo.service;
 
 
 import java.util.ArrayList;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 import com.sbs.exam.demo.repository.ArticleRepository;
 import com.sbs.exam.demo.util.Utility;
@@ -63,5 +65,11 @@ public class ArticleService {
 			return ResultData.from("S-1", Utility.f("%s (으)로 검색한 결과 입니다.", keyword), articles.getClass().getSimpleName(), articles);
 		}
 		return ResultData.from("F-1", Utility.f("%s (을)를 포함하는 게시물이 존재하지 않습니다.", keyword));
+	}
+
+	public ResultData<Map<String, String>> detail(int id) {
+		Map<String, String> map = repository.detail(id);
+		return ResultData.from("S-1", "게시물 상세정보", map.getClass().getSimpleName(), map);
+		
 	}
 }

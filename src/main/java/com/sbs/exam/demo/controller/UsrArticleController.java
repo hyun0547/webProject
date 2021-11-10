@@ -55,6 +55,11 @@ public class UsrArticleController {
 	public ResultData<Article> doGetArticle (int id) {
 		return service.getArticle(id);
 	}
+	@RequestMapping("/usr/article/detail")
+	public String articleDetail(Model model, int id) {
+		model.addAttribute("rd", service.detail(id));
+		return "/usr/article/detail";
+	}
 	@RequestMapping("/usr/article/doSearch")
 	@ResponseBody
 	public ResultData<ArrayList<Article>> doSearch (String keyword) {
