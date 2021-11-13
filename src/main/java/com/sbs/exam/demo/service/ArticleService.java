@@ -20,43 +20,62 @@ public class ArticleService {
 	}
 	
 	public ResultData<ArrayList<Article>> getArticles() {
+		
 		ArrayList<Article> articles = repository.getArticles();
+		
 		return ResultData.from("S-1", "전체 게시물 입니다.", articles.getClass().getSimpleName(), articles);
 	}
+	
 	public ResultData<Article> getArticle(int id) {
+		
 		Article article = repository.getArticle(id);
+		
 		if(article != null) {
 			return ResultData.from("S-1", Utility.f("%d번 게시물 입니다.", id), article.getClass().getSimpleName(), article);
 		}
+		
 		return ResultData.from("F-1", Utility.f("%d번 게시물은 존재하지 않습니다.", id));
 	}
+	
 	public ResultData<Article> doAdd(String title, String body, Member member) {
+		
 		repository.doAdd(title, body, member.getId());
 		int id = repository.getLastInsert();
 		Article article = repository.getArticle(id);
+		
 		return ResultData.from("S-1", "게시물이 추가되었습니다.", article.getClass().getSimpleName(), article);
 	}
+	
 	public ResultData<Integer> doDelete(Integer id, Member member) {
 		Article article = repository.getArticle(id);
 		
 		if(article != null) {
 			if(article.getMemberLoginId().equals(member.getLoginId())) {
+				
 				repository.doDelete(id);
+				
 				return ResultData.from("S-1", Utility.f("게시물이 삭제 되었습니다.", id), id.getClass().getSimpleName(), id);
 			}
+			
 			return ResultData.from("F-2", "해당 게시물을 삭제 할 수 있는 권한이 없습니다.");
 		}
+		
 		return ResultData.from("F-1", Utility.f("%d번 게시물은 존재하지 않습니다.", id));
 	}
+	
 	public ResultData<Article> doModify(int id, String title, String body, Member member) {
+		
 		Article article = repository.getArticle(id);
 		
 		if(article != null) {
 			if(article.getMemberLoginId().equals(member.getLoginId())) {
+				
 				repository.doModify(id, title, body);
+				
 				return ResultData.from("S-1", Utility.f("%d번 게시물이 변경 되었습니다.", id), article.getClass().getSimpleName(), article);
 			}
 		}
+		
 		return ResultData.from("F-1", Utility.f("%d번 게시물은 존재하지 않습니다.", id)); 
 	}
 	public ResultData<ArrayList<Article>> doSearch(String keyword) {
@@ -67,9 +86,22 @@ public class ArticleService {
 		return ResultData.from("F-1", Utility.f("%s (을)를 포함하는 게시물이 존재하지 않습니다.", keyword));
 	}
 
-	public ResultData<Map<String, String>> detail(int id) {
-		Map<String, String> map = repository.detail(id);
-		return ResultData.from("S-1", "게시물 상세정보", map.getClass().getSimpleName(), map);
+	public ResultData<Article> getForPrintArticle(String loginedMemberId, int id) {
 		
+		Article article = repository.getForPrintArticle(id);
+		
+		updatePrintForData(article, loginedMemberId);
+		
+		return ResultData.from("S-1", "게시물 상세정보", article.getClass().getSimpleName(), article);
+		
+	}
+
+	private void updatePrintForData(Article article, String loginedMemberId) {
+		
+		if(article.getMemberLoginId().equals(loginedMemberId)) {
+			article.setExtra__actorAuth(true);
+		}
+		
+		return;
 	}
 }

@@ -25,7 +25,7 @@ public interface ArticleRepository {
 		
 		public void doModify(@Param("id") int id,@Param("title") String title,@Param("body") String body);
 		
-		public Map<String, String> detail(@Param("id") int id);
+		public Article getForPrintArticle(@Param("id") int id);
 		
 }
 		

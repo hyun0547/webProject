@@ -14,18 +14,18 @@
 
 
 <%@ include file="../common/head.jspf" %>
-<c:set var="detail" value="${rd.data1}"/>
+<c:set var="article" value="${rd.data1}"/>
 	<section class="container mx-auto mt-5 px-3">
 		<div class="flex justify-between items-center">
-			<h1 class="text-2xl">${detail.title}</h1>
+			<h1 class="text-2xl">${article.title}</h1>
 			<div class="flex items-center">
-				<a class="hover:text-gray-500 mx-2" href="#">${detail.nickname}</a> 
-				<div class="bg-gray-500 color text-white rounded-xl px-2">${detail.authLevel}</div>
+				<a class="hover:text-gray-500 mx-2" href="#">${article.member.nickname}</a> 
+				<div class="bg-gray-500 color text-white rounded-xl px-2">${article.member.authLevel}</div>
 			</div>
 		</div>
 		<div class="h-1 bg-gray-200 mt-5"></div>
 		<div class="mt-10 px-10">
-			${detail.body}
+			${article.body}
 		</div>
 		<div class="h-1 bg-gray-200 mt-5"></div>
 		<div class="mt-5 flex justify-between">

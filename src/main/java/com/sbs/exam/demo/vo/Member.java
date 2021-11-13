@@ -20,5 +20,7 @@ public class Member {
 	String email;
 	int delStatus;
 	String delDate;
+	
+
 }
  

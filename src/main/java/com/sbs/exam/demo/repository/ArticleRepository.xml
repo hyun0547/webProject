@@ -4,6 +4,21 @@
 <mapper
 	namespace="com.sbs.exam.demo.repository.ArticleRepository">
 	
+	<resultMap id="forPrintArticle" type="Article">
+	   <id property="id" column="id" />
+	   <result property="title" column="title" />
+	   <result property="body" column="body" />
+	   <result property="regDate" column="regDate" />
+	   <result property="updateDate" column="updateDate" />
+	   <result property="memberLoginId" column="memberLoginId" />
+	        <association property="member"  javaType="Member" >
+	             <id property="loginId"  column="loginId" />
+	             <result property="authLevel"  column="authLevel" />
+	             <result property="nickname"  column="nickname" />
+	             <result property="email"  column="email" />
+	        </association>
+	</resultMap>
+	
 	<select id="getArticle" resultType="Article">
 		SELECT * FROM ARTICLE WHERE ID = #{id}
 	</select>
@@ -22,7 +37,7 @@
 		OR BODY LIKE CONCAT('%', #{keyword}, '%')
 	</select>
 	
-	<select id="detail" resultType="map">
+	<select id="getForPrintArticle" resultMap="forPrintArticle">
 		SELECT a.*, m.loginId, m.email, m.authLevel, m.name, m.nickname 
 		FROM article a LEFT OUTER JOIN `member` m 
 		ON a.memberLoginId = m.loginId
