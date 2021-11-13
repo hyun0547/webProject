@@ -47,6 +47,7 @@ public class ArticleService {
 	}
 	
 	public ResultData<Integer> doDelete(Integer id, Member member) {
+		
 		Article article = repository.getArticle(id);
 		
 		if(article != null) {

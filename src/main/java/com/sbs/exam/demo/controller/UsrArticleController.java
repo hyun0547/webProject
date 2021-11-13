@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.sbs.exam.demo.service.ArticleService;
+import com.sbs.exam.demo.util.Utility;
 import com.sbs.exam.demo.vo.Article;
 import com.sbs.exam.demo.vo.Member;
 import com.sbs.exam.demo.vo.ResultData;
@@ -41,15 +42,23 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public ResultData<Integer> doDelete (HttpSession session, int id) {
+	public String doDelete (HttpSession session, int id) {
 		
 		Member member = (Member) session.getAttribute("loginedMember");
+		System.out.println(member);
 		
 		if(member != null) {
-			return service.doDelete(id, member);
+			
+			ResultData<Integer> rd = service.doDelete(id, member);
+			
+			if(rd.isSuccess()) {
+				return Utility.jsReplace(rd.getMsg(), "/usr/article/list");
+			}
+			
+			return Utility.jsHistoryBack(rd.getMsg());
 		}
 		
-		return ResultData.from("F-1", "해당 서비스는 로그인을 하셔야 이용 가능 합니다.");
+		return Utility.jsHistoryBack("해당 서비스는 로그인을 하셔야 이용 가능 합니다.");
 	}
 	
 	@RequestMapping("/usr/article/doModify")
