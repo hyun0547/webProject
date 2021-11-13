@@ -29,8 +29,15 @@
 		</div>
 		<div class="h-1 bg-gray-200 mt-5"></div>
 		<div class="mt-5 flex justify-between">
-			<button onclick="history.back()">뒤로가기</button>
-			<a onclick="if(confirm('삭제 하시겠습니까?') == false){return false;}" href="/usr/article/doDelete">삭제</a>
+			<button class="btn-text-link" onclick="history.back()">뒤로가기</button>
+			<div class="flex">
+				<c:if test="${article.extra__actorAuth}">
+					<a class="mr-3 btn-text-link" href="/">수정</a>
+				</c:if>
+				<c:if test="${article.extra__actorAuth}">
+					<a class="btn-text-link" onclick="if(confirm('삭제 하시겠습니까?') == false){return false;}" href="/usr/article/doDelete?id=${article.id}">삭제</a>
+				</c:if>
+			</div>
 		</div>
 	</section>
 <%@ include file="../common/foot.jspf" %>

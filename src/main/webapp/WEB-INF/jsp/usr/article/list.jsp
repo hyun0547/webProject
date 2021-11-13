@@ -33,7 +33,7 @@
 				<c:forEach var="article" items="${rd.data1}">
 					<tr>
 						<td class="text-center">${article.id}</td>
-						<td class="text-center"><a href="/usr/article/detail?id=${article.id}">${article.title}</a></td>
+						<td class="text-center btn-text-link"><a href="/usr/article/detail?id=${article.id}">${article.title}</a></td>
 						<td class="text-right">${article.memberLoginId}</td>
 						<td class="text-right">
 							<fmt:parseDate var="parsedDate" value="${article.regDate}" pattern="yyyy-mm-dd HH:mm:ss"/>
