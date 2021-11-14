@@ -1,7 +1,6 @@
 package com.sbs.exam.demo.controller;
 
 import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,18 +10,21 @@ import com.sbs.exam.demo.service.ArticleService;
 import com.sbs.exam.demo.util.Utility;
 import com.sbs.exam.demo.vo.Article;
 import com.sbs.exam.demo.vo.ResultData;
+import com.sbs.exam.demo.vo.Rq;
 
 @Controller
 public class UsrArticleController {
+	
+	private Rq rq;
+	
 	ArticleService service;
-	public UsrArticleController(ArticleService service) {
+	public UsrArticleController(ArticleService service, Rq rq) {
+		this.rq = rq;
 		this.service = service;
 	}
 	
 	@RequestMapping("/usr/article/list")
 	public String getArticles (HttpServletRequest req, Model model) {
-		
-		Rq rq = new Rq(req);
 		
 		model.addAttribute("rd", service.getArticles(rq.getLoginedMember()));
 		
@@ -32,8 +34,6 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/write")
 	@ResponseBody
 	public ResultData<Article> doAdd (HttpServletRequest req, String title, String body) {
-		
-		Rq rq = new Rq(req);
 		
 		if(rq.isLogined()) {
 			return service.doAdd(title, body, rq.getLoginedMember());
@@ -45,8 +45,6 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
 	public String doDelete (HttpServletRequest req, int id) {
-		
-		Rq rq = new Rq(req);
 		
 		if(rq.isLogined()) {
 			
@@ -66,8 +64,6 @@ public class UsrArticleController {
 	@ResponseBody
 	public ResultData<Article> doModify (HttpServletRequest req, int id, String title, String body) {
 		
-		Rq rq = new Rq(req);
-		
 		if(rq.isLogined()) {
 			return service.doModify(id, title, body, rq.getLoginedMember());
 		}
@@ -85,7 +81,6 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/detail")
 	public String getForPrintArticle(HttpServletRequest req, Model model, int id) {
 		
-		Rq rq = new Rq(req);
 		
 		model.addAttribute("rd", service.getForPrintArticle(rq.getLoginedMemberId(), id));
 		

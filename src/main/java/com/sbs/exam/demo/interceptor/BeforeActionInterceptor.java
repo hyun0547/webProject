@@ -5,14 +5,21 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.sbs.exam.demo.vo.Rq;
+
 @Component
 public class BeforeActionInterceptor implements HandlerInterceptor{
 	
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+	private Rq rq;
+	
+	public BeforeActionInterceptor(Rq rq) {
+		this.rq = rq;
+	}
+	
+	public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler)
 			throws Exception {
+		req.setAttribute("rq", rq);
 		
-		System.out.println("InterceptorTest");
-		
-		return HandlerInterceptor.super.preHandle(request, response, handler);
+		return HandlerInterceptor.super.preHandle(req, resp, handler);
 	}
 }
