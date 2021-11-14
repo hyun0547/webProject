@@ -34,6 +34,6 @@ build/
 
 ## 커스텀
 bin/
-
+logback-spring.xml
 LOG_PATH_IS_UNDEFINED/
 log/
