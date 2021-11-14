@@ -3,7 +3,6 @@ package com.sbs.exam.demo.controller;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sbs.exam.demo.service.ArticleService;
 import com.sbs.exam.demo.util.Utility;
 import com.sbs.exam.demo.vo.Article;
-import com.sbs.exam.demo.vo.Member;
 import com.sbs.exam.demo.vo.ResultData;
 
 @Controller
@@ -22,21 +20,23 @@ public class UsrArticleController {
 	}
 	
 	@RequestMapping("/usr/article/list")
-	public String getArticles (Model model) {
+	public String getArticles (HttpServletRequest req, Model model) {
 		
-		model.addAttribute("rd", service.getArticles());
+		Rq rq = new Rq(req);
+		
+		model.addAttribute("rd", service.getArticles(rq.getLoginedMember()));
 		
 		return "/usr/article/list";
 	}
 	
-	@RequestMapping("/usr/article/doAdd")
+	@RequestMapping("/usr/article/write")
 	@ResponseBody
-	public ResultData<Article> doAdd (HttpSession session, String title, String body) {
+	public ResultData<Article> doAdd (HttpServletRequest req, String title, String body) {
 		
-		Member member = (Member) session.getAttribute("loginedMember");
+		Rq rq = new Rq(req);
 		
-		if(member != null) {
-			return service.doAdd(title, body, member);
+		if(rq.isLogined()) {
+			return service.doAdd(title, body, rq.getLoginedMember());
 		}
 		
 		return ResultData.from("F-1", "해당 서비스는 로그인을 하셔야 이용 가능 합니다.");
@@ -64,12 +64,12 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public ResultData<Article> doModify (HttpSession session, int id, String title, String body) {
+	public ResultData<Article> doModify (HttpServletRequest req, int id, String title, String body) {
 		
-		Member member = (Member) session.getAttribute("loginedMember");
+		Rq rq = new Rq(req);
 		
-		if(member != null) {
-			return service.doModify(id, title, body, member);
+		if(rq.isLogined()) {
+			return service.doModify(id, title, body, rq.getLoginedMember());
 		}
 		
 		return ResultData.from("F-1", "해당 서비스는 로그인을 하셔야 이용 가능 합니다.");
@@ -77,24 +77,17 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/doGetArticle")
 	@ResponseBody
-	public ResultData<Article> doGetArticle (int id) {
+	public ResultData<Article> GetArticle (int id) {
 		
 		return service.getArticle(id);
 	}
 	
 	@RequestMapping("/usr/article/detail")
-	public String getForPrintArticle(HttpSession session, Model model, int id) {
+	public String getForPrintArticle(HttpServletRequest req, Model model, int id) {
 		
-		boolean isLogined = false;
-		String loginedMemberId = "";
-		Member loginedMember = (Member) session.getAttribute("loginedMember");
+		Rq rq = new Rq(req);
 		
-		if(loginedMember != null) {
-			loginedMemberId = loginedMember.getLoginId();
-			isLogined = true;
-		}
-		
-		model.addAttribute("rd", service.getForPrintArticle(loginedMemberId, id));
+		model.addAttribute("rd", service.getForPrintArticle(rq.getLoginedMemberId(), id));
 		
 		return "/usr/article/detail";
 	}

@@ -13,6 +13,8 @@ public class Rq {
 	private boolean isLogined;
 	@Getter
 	private Member loginedMember;
+	@Getter
+	private String loginedMemberId;
 	
 	public Rq(HttpServletRequest req) {
 		
@@ -22,6 +24,7 @@ public class Rq {
 		if(member != null) {
 			this.isLogined = true;
 			this.loginedMember = member;
+			this.loginedMemberId = member.getLoginId();
 		}
 		
 	}

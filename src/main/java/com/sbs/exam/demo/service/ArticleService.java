@@ -19,23 +19,19 @@ public class ArticleService {
 		this.repository = repository;
 	}
 	
-	public ResultData<ArrayList<Article>> getArticles() {
+	public ResultData<ArrayList<Article>> getArticles(Member loginedMember) {
 		
 		ArrayList<Article> articles = repository.getArticles();
+		
+		if(loginedMember != null) {
+			for(Article article : articles) {
+				updatePrintForData(article, loginedMember.getLoginId());
+			}
+		}
 		
 		return ResultData.from("S-1", "전체 게시물 입니다.", articles.getClass().getSimpleName(), articles);
 	}
 	
-	public ResultData<Article> getArticle(int id) {
-		
-		Article article = repository.getArticle(id);
-		
-		if(article != null) {
-			return ResultData.from("S-1", Utility.f("%d번 게시물 입니다.", id), article.getClass().getSimpleName(), article);
-		}
-		
-		return ResultData.from("F-1", Utility.f("%d번 게시물은 존재하지 않습니다.", id));
-	}
 	
 	public ResultData<Article> doAdd(String title, String body, Member member) {
 		
@@ -75,6 +71,8 @@ public class ArticleService {
 				
 				return ResultData.from("S-1", Utility.f("%d번 게시물이 변경 되었습니다.", id), article.getClass().getSimpleName(), article);
 			}
+			
+			return ResultData.from("F-1", "해당 게시물을 변경할 수 있는 권한이 없습니다.");
 		}
 		
 		return ResultData.from("F-1", Utility.f("%d번 게시물은 존재하지 않습니다.", id)); 
@@ -91,10 +89,25 @@ public class ArticleService {
 		
 		Article article = repository.getForPrintArticle(id);
 		
+		if(loginedMemberId == null) {
+			loginedMemberId = "";
+		}
+		
 		updatePrintForData(article, loginedMemberId);
 		
 		return ResultData.from("S-1", "게시물 상세정보", article.getClass().getSimpleName(), article);
 		
+	}
+	
+	public ResultData<Article> getArticle(int id) {
+		
+		Article article = repository.getArticle(id);
+		
+		if(article != null) {
+			return ResultData.from("S-1", Utility.f("%d번 게시물 입니다.", id), article.getClass().getSimpleName(), article);
+		}
+		
+		return ResultData.from("F-1", Utility.f("%d번 게시물은 존재하지 않습니다.", id));
 	}
 
 	private void updatePrintForData(Article article, String loginedMemberId) {
