@@ -24,7 +24,7 @@ public class UsrArticleController {
 	}
 	
 	@RequestMapping("/usr/article/list")
-	public String getArticles (HttpServletRequest req, Model model) {
+	public String getArticles (Model model) {
 		
 		model.addAttribute("rd", service.getArticles(rq.getLoginedMember()));
 		
@@ -33,42 +33,30 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/write")
 	@ResponseBody
-	public ResultData<Article> doAdd (HttpServletRequest req, String title, String body) {
+	public ResultData<Article> doAdd (String title, String body) {
 		
-		if(rq.isLogined()) {
-			return service.doAdd(title, body, rq.getLoginedMember());
-		}
-		
-		return ResultData.from("F-1", "해당 서비스는 로그인을 하셔야 이용 가능 합니다.");
+		return service.doAdd(title, body, rq.getLoginedMember());
 	}
 	
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public String doDelete (HttpServletRequest req, int id) {
+	public String doDelete (int id) {
+	
+	
+		ResultData<Integer> rd = service.doDelete(id, rq.getLoginedMember());
 		
-		if(rq.isLogined()) {
-			
-			ResultData<Integer> rd = service.doDelete(id, rq.getLoginedMember());
-			
-			if(rd.isSuccess()) {
-				return Utility.jsReplace(rd.getMsg(), "/usr/article/list");
-			}
-			
-			return Utility.jsHistoryBack(rd.getMsg());
+		if(rd.isSuccess()) {
+			return Utility.jsReplace(rd.getMsg(), "/usr/article/list");
 		}
 		
-		return Utility.jsHistoryBack("해당 서비스는 로그인을 하셔야 이용 가능 합니다.");
+		return Utility.jsHistoryBack(rd.getMsg());
 	}
 	
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public ResultData<Article> doModify (HttpServletRequest req, int id, String title, String body) {
+	public ResultData<Article> doModify (int id, String title, String body) {
 		
-		if(rq.isLogined()) {
-			return service.doModify(id, title, body, rq.getLoginedMember());
-		}
-		
-		return ResultData.from("F-1", "해당 서비스는 로그인을 하셔야 이용 가능 합니다.");
+		return service.doModify(id, title, body, rq.getLoginedMember());
 	}
 	
 	@RequestMapping("/usr/article/doGetArticle")
@@ -79,7 +67,7 @@ public class UsrArticleController {
 	}
 	
 	@RequestMapping("/usr/article/detail")
-	public String getForPrintArticle(HttpServletRequest req, Model model, int id) {
+	public String getForPrintArticle(Model model, int id) {
 		
 		
 		model.addAttribute("rd", service.getForPrintArticle(rq.getLoginedMemberId(), id));
