@@ -1,6 +1,8 @@
 package com.sbs.exam.demo.controller;
 
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,14 +44,13 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public String doDelete (HttpSession session, int id) {
+	public String doDelete (HttpServletRequest req, int id) {
 		
-		Member member = (Member) session.getAttribute("loginedMember");
-		System.out.println(member);
+		Rq rq = new Rq(req);
 		
-		if(member != null) {
+		if(rq.isLogined()) {
 			
-			ResultData<Integer> rd = service.doDelete(id, member);
+			ResultData<Integer> rd = service.doDelete(id, rq.getLoginedMember());
 			
 			if(rd.isSuccess()) {
 				return Utility.jsReplace(rd.getMsg(), "/usr/article/list");
