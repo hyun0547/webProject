@@ -1,6 +1,5 @@
 package com.sbs.exam.demo.service;
 
-import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 import com.sbs.exam.demo.repository.MemberRepository;
 import com.sbs.exam.demo.util.Utility;
@@ -31,16 +30,19 @@ public class MemberService {
 		return ResultData.from("S-1", "가입에 성공했습니다.", joinedMember.getClass().getSimpleName(), joinedMember);
 	}
 
-	public ResultData<Member> login(HttpSession session, String loginId, String loginPw) {
+	public ResultData<Member> doLogin(String loginId, String loginPw) {
 		Member member = repository.getMember(loginId);
 		
 		if(member == null) {
+			
 			return ResultData.from("F-1", "존재하지 않는 아이디 입니다.");
 		}
+		
 		else if(member.getLoginPw().equals(loginPw)) {
-			session.setAttribute("loginedMember", member);
+			
 			return ResultData.from("S-1", Utility.f("%s님 안녕하세요", member.getNickname()), member.getClass().getSimpleName(), member);
 		}
+		
 		return ResultData.from("F-2", "비밀번호를 확인해 주세요");
 	}
 

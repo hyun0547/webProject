@@ -2,6 +2,8 @@ package com.sbs.exam.demo.controller;
 
 import java.util.HashMap;
 import java.util.Iterator;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,15 +13,19 @@ import com.sbs.exam.demo.service.MemberService;
 import com.sbs.exam.demo.util.Utility;
 import com.sbs.exam.demo.vo.Member;
 import com.sbs.exam.demo.vo.ResultData;
+import com.sbs.exam.demo.vo.Rq;
 
 
 @Controller
 public class UsrMemberController {
 	MemberService service; 
+	Rq rq;
 	
-	public UsrMemberController(MemberService service) {
+	public UsrMemberController(MemberService service, Rq rq) {
 		this.service = service;
+		this.rq = rq;
 	}
+	
 	
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
@@ -41,16 +47,33 @@ public class UsrMemberController {
 		}
 		return service.doJoin(newMember);
 	}
-	@RequestMapping("/usr/member/login")
+	
+	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
-	public ResultData<Member> login(HttpSession session, String loginId, String loginPw){
-		Member loginedMember = (Member) session.getAttribute("loginedMember");
-		if(loginedMember != null) {
-			return ResultData.from("F-3", Utility.f("이미 %s 계정으로 로그인 되어 있습니다.", loginedMember.getLoginId()));
+	public String doLogin(HttpServletRequest req, String loginId, String loginPw){
+		if(rq.isLogined()) {
+			return Utility.jsReplace("이미 로그인 되어 있습니다.", "/");
 		};
 		
-		return service.login(session, loginId, loginPw);
+		ResultData<Member> rd = service.doLogin(loginId, loginPw);
+		
+		if(rd.isFail()) {
+			return Utility.jsHistoryBack(rd.getMsg());
+		}
+		
+		Member loginedMember = rd.getData1();
+		
+		req.getSession().setAttribute("loginedMember", loginedMember);
+		return Utility.jsReplace(Utility.f("%s님 안녕하세요.", loginedMember.getNickname()), "/");
+		
 	}
+	
+	@RequestMapping("/usr/member/showLogin")
+	public String showLogin(String loginId, String loginPw){
+		
+		return "/usr/member/login";
+	}
+	
 	@RequestMapping("/usr/member/logout")
 	@ResponseBody
 	public ResultData<Member> logout(HttpSession session){
