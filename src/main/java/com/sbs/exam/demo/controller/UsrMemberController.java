@@ -76,14 +76,13 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/logout")
 	@ResponseBody
-	public ResultData<Member> logout(HttpSession session){
-		Member loginedMember = (Member) session.getAttribute("loginedMember");
-		if(loginedMember == null) {
-			return ResultData.from("F-1","현재 로그인 되어있는 계정이 없습니다.");
+	public String logout(HttpSession session){
+		if(!rq.isLogined()) {
+			return Utility.jsHistoryBack("현재 로그인 되어있는 계정이 없습니다.");
 		};
 		
 		session.removeAttribute("loginedMember");
-		return ResultData.from("S-1", "로그아웃 되었습니다.");
+		return Utility.jsReplace("로그아웃 되었습니다.", "/");
 	}
 	
 	
