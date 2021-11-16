@@ -50,7 +50,7 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
-	public String doLogin(HttpServletRequest req, String loginId, String loginPw){
+	public String doLogin(String loginId, String loginPw){
 		if(rq.isLogined()) {
 			return Utility.jsReplace("이미 로그인 되어 있습니다.", "/");
 		};
@@ -63,7 +63,8 @@ public class UsrMemberController {
 		
 		Member loginedMember = rd.getData1();
 		
-		req.getSession().setAttribute("loginedMember", loginedMember);
+		rq.setSession("loginedMember", loginedMember);
+		
 		return Utility.jsReplace(Utility.f("%s님 안녕하세요.", loginedMember.getNickname()), "/");
 		
 	}
@@ -81,7 +82,7 @@ public class UsrMemberController {
 			return Utility.jsHistoryBack("현재 로그인 되어있는 계정이 없습니다.");
 		};
 		
-		session.removeAttribute("loginedMember");
+		rq.removeSession("loginedMember");
 		return Utility.jsReplace("로그아웃 되었습니다.", "/");
 	}
 	

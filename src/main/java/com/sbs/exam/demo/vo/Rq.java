@@ -58,4 +58,12 @@ public class Rq {
 			e.printStackTrace();
 		}
 	}
+
+	public void removeSession(String delSession) {
+		session.removeAttribute(delSession);
+	}
+
+	public void setSession(String key, Object arg) {
+		session.setAttribute(key, arg);
+	}
 }
