@@ -54,9 +54,27 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public ResultData<Article> doModify (int id, String title, String body) {
+	public String doModify (int id, String title, String body) {
+		ResultData<Article> rd = service.doModify(id, title, body, rq.getLoginedMember());
 		
-		return service.doModify(id, title, body, rq.getLoginedMember());
+		if(rd.isFail()) {
+			return Utility.jsHistoryBack(rd.getMsg()); 
+		}
+		
+		return Utility.jsReplace(rd.getMsg(), "/usr/article/detail?id=" + id);
+	}
+	
+	@RequestMapping("/usr/article/showModify")
+	public String showModify (Model model, int id) {
+		ResultData<Article> rd = service.getForPrintArticle(rq.getLoginedMemberId(), id);
+		
+		if(!rd.getData1().isExtra__actorAuth()) {
+			return Utility.jsHistoryBack(rd.getMsg()); 
+		}
+		
+		model.addAttribute("rd", rd);
+		
+		return "/usr/article/modify";
 	}
 	
 	@RequestMapping("/usr/article/doGetArticle")
