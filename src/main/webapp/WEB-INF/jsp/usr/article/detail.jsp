@@ -1,17 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- 제이쿼리 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
-
-<!-- 테일윈드 -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"/>
-
-<!-- 폰트 어썸 -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 
 <%@ include file="../common/head.jspf" %>
 <c:set var="article" value="${rd.data1}"/>
@@ -20,7 +11,7 @@
 			<h1 class="text-2xl">${article.title}</h1>
 			<div class="flex items-center">
 				<a class="hover:text-gray-500 mx-2" href="#">${article.member.nickname}</a> 
-				<div class="bg-gray-500 color text-white rounded-xl px-2">${article.member.authLevel}</div>
+				<div class="badge badge-accent badge-outline">${article.member.authLevel}</div>
 			</div>
 		</div>
 		<div class="h-1 bg-gray-200 mt-5"></div>

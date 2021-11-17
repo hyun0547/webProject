@@ -12,8 +12,8 @@
 .table-box1 > table tr th,
 .table-box1 > table tr td
 {
-	border-top:1px solid gray;
-	border-bottom:1px solid gray;
+	border-top:1px solid #2AA79B;
+	border-bottom:1px solid #2AA79B;
 	padding: 10px;
 }
 
