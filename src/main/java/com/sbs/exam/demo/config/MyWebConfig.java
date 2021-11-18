@@ -26,10 +26,10 @@ public class MyWebConfig implements WebMvcConfigurer{
 		beforeActionIr.addPathPatterns("/**").excludePathPatterns("/resource/**");
 		
 		InterceptorRegistration needLoginIr = registry.addInterceptor(needLoginInterceptor);
-		needLoginIr.addPathPatterns("/usr/article/write**").addPathPatterns("/usr/article/doDelete**")
-		.addPathPatterns("/usr/article/doModify**");
+		needLoginIr.addPathPatterns("/usr/article/**Write**").addPathPatterns("/usr/article/**Delete**")
+		.addPathPatterns("/usr/article/**Modify**");
 		
 		InterceptorRegistration needLogoutIr = registry.addInterceptor(needLogoutInterceptor);
-		needLogoutIr.addPathPatterns("/usr/member/showLogin**").addPathPatterns("/usr/member/login**");
+		needLogoutIr.addPathPatterns("/usr/member/**Login**");
 	}
 }

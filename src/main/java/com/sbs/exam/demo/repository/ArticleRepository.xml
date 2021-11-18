@@ -46,11 +46,11 @@
 	
 	<insert id="doAdd">
 		INSERT INTO ARTICLE 
-		SET REGDATE = NOW(), 
-		UPDATEDATE = NOW(), 
-		TITLE = #{title}, 
-		BODY = #{body}, 
-		MEMBERID = #{memberLoginId}
+		SET regDate = NOW(), 
+		updateDate = NOW(), 
+		title = #{title}, 
+		body = #{body}, 
+		memberLoginId = #{memberLoginId}
 	</insert>
 	
 	<delete id="doDelete">

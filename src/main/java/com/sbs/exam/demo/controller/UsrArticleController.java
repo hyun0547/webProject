@@ -31,11 +31,16 @@ public class UsrArticleController {
 		return "/usr/article/list";
 	}
 	
-	@RequestMapping("/usr/article/write")
+	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public ResultData<Article> doAdd (String title, String body) {
-		
-		return service.doAdd(title, body, rq.getLoginedMember());
+	public String doAdd (String title, String body) {
+		ResultData<Article> rd = service.doAdd(title, body, rq.getLoginedMember());
+		return Utility.jsReplace(rd.getMsg(), "/usr/article/detail?id=" + rd.getData1().getId());
+	}
+	
+	@RequestMapping("/usr/article/showWrite")
+	public String showWrite () {
+		return "/usr/article/write";
 	}
 	
 	@RequestMapping("/usr/article/doDelete")

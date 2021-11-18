@@ -19,7 +19,7 @@ public interface ArticleRepository {
 		
 		public int getLastInsert();
 		
-		public void doAdd(@Param("title") String title,@Param("body") String body, @Param("memberId") int memberId);
+		public void doAdd(@Param("title") String title,@Param("body") String body, @Param("memberLoginId") String memberLoginId);
 		
 		public void doDelete(@Param("id") int id);
 		
