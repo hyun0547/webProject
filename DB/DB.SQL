@@ -94,6 +94,12 @@ INSERT INTO `sbs_s_2021_10`.`member`
 	'01012345679', 
 	'testUser2@daum.net'
 	);
+
+# 게시물 작성자 추가
+ALTER TABLE article ADD COLUMN memberLoginId VARCHAR(20) NOT NULL AFTER updatedate;
+
+# 기존 게시글 작성자 testUser1번으로 설정
+UPDATE article SET memberLoginId = 'testUser1' WHERE memberLoginId = '';
 	
 SELECT * FROM `member`;
 
