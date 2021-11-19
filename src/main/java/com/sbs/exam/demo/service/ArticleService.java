@@ -19,9 +19,9 @@ public class ArticleService {
 		this.repository = repository;
 	}
 	
-	public ResultData<ArrayList<Article>> getArticles(Member loginedMember) {
+	public ResultData<ArrayList<Article>> getArticles(Member loginedMember, int typeId) {
 		
-		ArrayList<Article> articles = repository.getArticles();
+		ArrayList<Article> articles = repository.getArticles(typeId);
 		
 		if(loginedMember != null) {
 			for(Article article : articles) {

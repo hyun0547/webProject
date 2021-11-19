@@ -24,7 +24,12 @@
 	</select>
 	
 	<select id="getArticles" resultType="Article">
-		SELECT * FROM ARTICLE ORDER BY ID DESC
+		SELECT * 
+		FROM ARTICLE
+		<if test="typeId != 0">
+			WHERE typeId=#{typeId}
+		</if> 
+		ORDER BY ID DESC
 	</select>
 	
 	<select id="getLastInsert" resultType="int">

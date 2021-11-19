@@ -13,7 +13,7 @@ public interface ArticleRepository {
 	
 		public Article getArticle(@Param("id") int id);
 		
-		public ArrayList<Article> getArticles();
+		public ArrayList<Article> getArticles(@Param("typeId") int typeId);
 		
 		public ArrayList<Article> doSearch(@Param("keyword") String keyword);
 		

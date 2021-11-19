@@ -12,7 +12,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:set var="pageTitle" value="게시판"/>
+<c:set var="pageTitle" value="${typeRd.data1.typeName}"/>
 
 <%@ include file="../common/head.jspf" %>
 	<section class="mt-5">
@@ -30,7 +30,7 @@
 					<th class="text-right">작성자</th>
 					<th class="text-right">작성일</th>
 				</tr>
-				<c:forEach var="article" items="${rd.data1}">
+				<c:forEach var="article" items="${articleRd.data1}">
 					<tr>
 						<td class="text-center">${article.id}</td>
 						<td class="text-center btn-text-link"><a href="/usr/article/detail?id=${article.id}">${article.title}</a></td>
