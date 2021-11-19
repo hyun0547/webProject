@@ -55,7 +55,8 @@
 		updateDate = NOW(), 
 		title = #{title}, 
 		body = #{body}, 
-		memberLoginId = #{memberLoginId}
+		memberLoginId = #{memberLoginId},
+		typeId = #{typeId}
 	</insert>
 	
 	<delete id="doDelete">

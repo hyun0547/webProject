@@ -5,9 +5,9 @@
 		<form class="flex flex-col mt-40" action="/usr/article/doWrite">
 			<div class="flex justify-between items-end mb-3">
 				<span>제목</span>
-				<select class="select select-bordered select-sm select-accent w-full max-w-xs" name="type">
+				<select class="select select-bordered select-sm select-accent w-full max-w-xs" name="typeId">
 					<c:forEach var="type" items="${typeRd.data1}">
-  						<option>${type.typeName}</option> 
+  						<option value="${type.id}">${type.typeName}</option> 
 					</c:forEach>
 				</select>
 			</div>

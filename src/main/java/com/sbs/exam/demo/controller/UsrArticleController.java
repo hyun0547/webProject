@@ -41,9 +41,8 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public String doAdd (String title, String body, String type) {
-		System.out.println(type);
-		ResultData<Article> rd = articleService.doAdd(title, body, rq.getLoginedMember());
+	public String doAdd (String title, String body, int typeId) {
+		ResultData<Article> rd = articleService.doAdd(title, body, typeId, rq.getLoginedMember());
 		return Utility.jsReplace(rd.getMsg(), "/usr/article/detail?id=" + rd.getData1().getId());
 	}
 	
