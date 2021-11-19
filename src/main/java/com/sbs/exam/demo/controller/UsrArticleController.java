@@ -41,13 +41,18 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public String doAdd (String title, String body) {
+	public String doAdd (String title, String body, String type) {
+		System.out.println(type);
 		ResultData<Article> rd = articleService.doAdd(title, body, rq.getLoginedMember());
 		return Utility.jsReplace(rd.getMsg(), "/usr/article/detail?id=" + rd.getData1().getId());
 	}
 	
 	@RequestMapping("/usr/article/showWrite")
-	public String showWrite () {
+	public String showWrite (Model model) {
+		ResultData<ArrayList<ArticleType>> typeRd = articleTypeService.getTypes();
+		
+		model.addAttribute("typeRd", typeRd);
+		
 		return "/usr/article/write";
 	}
 	

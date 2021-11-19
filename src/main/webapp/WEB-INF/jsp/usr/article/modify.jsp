@@ -6,7 +6,7 @@
 			<input type="text" name="title" class="input input-accent input-bordered mb-5" value="${rd.data1.title}"/>
 			<textarea class="textarea h-24 textarea-bordered textarea-accent mb-5 h-60" name="body">${rd.data1.body}</textarea>
 			<input type="hidden" name="id" value="${rd.data1.id}" />
-			<button class="btn btn-ghost w-32">수정 완료</button>
+			<button class="btn btn-ghost w-28">수정 완료</button>
 		</form>
 	</div>
 </section>
