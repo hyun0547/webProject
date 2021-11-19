@@ -20,3 +20,8 @@
 .btn-text-link:hover {
   color: gray;
 }
+
+.article-menu:hover > .article-list {
+  height: 90px;
+  opacity: 1;
+}

@@ -105,3 +105,57 @@ SELECT * FROM `member`;
 
 SELECT * 
 FROM article;
+
+CREATE TABLE article_type (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    typeName VARCHAR(30) NOT NULL,
+    delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '게시판 삭제 여부(0=유지,1=삭제)',
+    delDate DATETIME COMMENT '삭제날짜'
+);
+
+INSERT INTO `sbs_s_2021_10`.`article_type` 
+	(
+	`regDate`, 
+	`updateDate`, 
+	`typeName`
+	)
+	VALUES
+	(
+	NOW(), 
+	NOW(), 
+	'스터디 로그'
+	);
+	
+INSERT INTO `sbs_s_2021_10`.`article_type` 
+	(
+	`regDate`, 
+	`updateDate`, 
+	`typeName`
+	)
+	VALUES
+	(
+	NOW(), 
+	NOW(), 
+	'일기'
+	);
+	
+INSERT INTO `sbs_s_2021_10`.`article_type` 
+	(
+	`regDate`, 
+	`updateDate`, 
+	`typeName`
+	)
+	VALUES
+	(
+	NOW(), 
+	NOW(), 
+	'메모'
+	);
+
+ALTER TABLE article ADD typeId INT(10) UNSIGNED NOT NULL;
+
+UPDATE article SET typeId=1 WHERE typeId=0;
+
+ALTER TABLE article ADD FOREIGN KEY(typeId) REFERENCES article_type(id);
