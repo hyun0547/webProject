@@ -41,6 +41,7 @@
 	      	<li><a href="/usr/article/showWrite" class="h-full block flex items-center px-3 mx-3 btn-text-link"><span>글쓰기</span></a></li>
 	      <c:if test="${!rq.isLogined()}">
 	      	<li><a href="/usr/member/showLogin" class="h-full block flex items-center px-3 mx-3 btn-text-link"><span>로그인</span></a></li>
+	      	<li><a href="/usr/member/showJoin" class="h-full block flex items-center px-3 mx-3 btn-text-link"><span>회원가입</span></a></li>
 	      </c:if>
 	      <c:if test="${rq.isLogined()}">
 	      	<li><a href="/usr/member/logout" class="h-full block flex items-center px-3 mx-3 btn-text-link"><span>로그아웃</span></a></li>

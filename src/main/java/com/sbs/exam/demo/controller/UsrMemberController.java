@@ -30,23 +30,41 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public ResultData<Member> doJoin(@ModelAttribute Member newMember ) {
+	public String doJoin(@ModelAttribute Member newMember ) {
+		ResultData<Member> rd = null;
+		
 		HashMap<String, String> joinParam = new HashMap<>();
-		joinParam.put("loginId", newMember.getLoginId());
-		joinParam.put("loginPw", newMember.getLoginPw());
-		joinParam.put("name", newMember.getName());
-		joinParam.put("nickname", newMember.getNickname());
 		joinParam.put("cellphoneNo", newMember.getCellphoneNo());
 		joinParam.put("email", newMember.getEmail());
+		joinParam.put("nickname", newMember.getNickname());
+		joinParam.put("name", newMember.getName());
+		joinParam.put("loginPw", newMember.getLoginPw());
+		joinParam.put("loginId", newMember.getLoginId());
 		
 		Iterator<String> keys = joinParam.keySet().iterator();
 		while(keys.hasNext() ){
 			String key = keys.next();
 			if(Utility.checkNull(joinParam.get(key))) {
-				return ResultData.from("F-1", Utility.f("%s 값을 입력하세요", key));
+				rd = ResultData.from("F-1", Utility.f("%s 값을 입력하세요", key));
 			}
 		}
-		return service.doJoin(newMember);
+		
+		if(rd == null) {
+			rd = service.doJoin(newMember);
+		}
+		
+		if(rd.isSuccess()){
+			return Utility.jsReplace(rd.getMsg(), "/usr/member/showLogin");
+		}
+		
+		
+		return Utility.jsHistoryBack(rd.getMsg());
+	}
+	
+	@RequestMapping("/usr/member/showJoin")
+	public String showJoin(){
+		
+		return "/usr/member/join";
 	}
 	
 	@RequestMapping("/usr/member/doLogin")
