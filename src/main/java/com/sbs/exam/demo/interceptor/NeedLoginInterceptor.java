@@ -20,8 +20,7 @@ public class NeedLoginInterceptor implements HandlerInterceptor{
 			throws Exception {
 		
 		if(!rq.isLogined()) {
-			String afterLoginUri = rq.getEncodedUri();
-			rq.printReplaceJs("로그인 후 이용해 주세요", "/usr/member/showLogin?afterLoginUri=" + afterLoginUri);
+			rq.printReplaceJs("로그인 후 이용해 주세요", "/usr/member/showLogin");
 			return false;
 		}
 		

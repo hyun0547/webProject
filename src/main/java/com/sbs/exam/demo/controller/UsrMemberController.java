@@ -77,10 +77,9 @@ public class UsrMemberController {
 	}
 	
 	@RequestMapping("/usr/member/showLogin")
-	public String showLogin(Model model, String afterLoginUri){
-		
+	public String showLogin(Model model){
+		String afterLoginUri = rq.getBeforeUri();
 		model.addAttribute("afterLoginUri", afterLoginUri);
-		System.out.println(afterLoginUri);
 		
 		return "/usr/member/login";
 	}

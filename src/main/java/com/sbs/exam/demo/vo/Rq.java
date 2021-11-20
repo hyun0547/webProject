@@ -90,4 +90,7 @@ public class Rq {
 	public String getCurrentUri(){
 		return req.getRequestURI();
 	}
+	public String getBeforeUri() {
+		return req.getHeader("referer");
+	}
 }
