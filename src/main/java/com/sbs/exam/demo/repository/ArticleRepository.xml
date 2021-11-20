@@ -26,20 +26,20 @@
 	<select id="getArticles" resultType="Article">
 		SELECT * 
 		FROM ARTICLE
-		<if test="typeId != 0">
-			WHERE typeId=#{typeId}
-		</if> 
+		<where>
+			<if test="typeId != 0">
+				typeId=#{typeId}
+			</if>
+			<if test="searchKeyword != null">
+				AND (TITLE LIKE CONCAT('%', #{searchKeyword}, '%')  
+				OR BODY LIKE CONCAT('%', #{searchKeyword}, '%'))
+			</if>
+		</where>
 		ORDER BY ID DESC
 	</select>
 	
 	<select id="getLastInsert" resultType="int">
 		SELECT LAST_INSERT_ID()
-	</select>
-	
-	<select id="doSearch" resultType="Article">
-		SELECT * FROM ARTICLE 
-		WHERE TITLE LIKE CONCAT('%', #{keyword}, '%')  
-		OR BODY LIKE CONCAT('%', #{keyword}, '%')
 	</select>
 	
 	<select id="getForPrintArticle" resultMap="forPrintArticle">

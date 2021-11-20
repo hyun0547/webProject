@@ -17,6 +17,13 @@
 <%@ include file="../common/head.jspf" %>
 	<section class="mt-5">
 		<div class="container mx-auto px-3 table-box1">
+			<div class="float-right mr-2">
+				<form class="flex items-center" action="/usr/article/list">
+					<input type="hidden" name="typeId" value="${typeRd.data1.id}" />
+					<input class="input input-bordered mr-2" type="text" name="searchKeyword"/>
+					<button><i class="fas fa-search fa-lg opacity-70"></i></button>
+				</form>
+			</div>
 			<table class="w-full">
 				<colgroup>
 					<col width="3%"/>

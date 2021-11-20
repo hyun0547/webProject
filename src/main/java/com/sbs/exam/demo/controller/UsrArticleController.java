@@ -28,8 +28,8 @@ public class UsrArticleController {
 	}
 	
 	@RequestMapping("/usr/article/list")
-	public String getArticles (Model model, int typeId) {
-		ResultData<ArrayList<Article>> articleRd = articleService.getArticles(rq.getLoginedMember(), typeId);
+	public String getArticles (Model model, int typeId, String searchKeyword) {
+		ResultData<ArrayList<Article>> articleRd = articleService.getArticles(rq.getLoginedMember(), typeId, searchKeyword);
 		ResultData<ArticleType> typeRd = articleTypeService.getType(typeId);
 		
 		model.addAttribute("articleRd", articleRd);
@@ -109,13 +109,5 @@ public class UsrArticleController {
 		
 		return "/usr/article/detail";
 	}
-	
-	@RequestMapping("/usr/article/doSearch")
-	@ResponseBody
-	public ResultData<ArrayList<Article>> doSearch (String keyword) {
-		
-		return articleService.doSearch(keyword);
-	}
-	
 	
 }

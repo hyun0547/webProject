@@ -19,9 +19,9 @@ public class ArticleService {
 		this.repository = repository;
 	}
 	
-	public ResultData<ArrayList<Article>> getArticles(Member loginedMember, int typeId) {
+	public ResultData<ArrayList<Article>> getArticles(Member loginedMember, int typeId, String searchKeyword) {
 		
-		ArrayList<Article> articles = repository.getArticles(typeId);
+		ArrayList<Article> articles = repository.getArticles(typeId, searchKeyword);
 		
 		if(loginedMember != null) {
 			for(Article article : articles) {
@@ -75,13 +75,6 @@ public class ArticleService {
 		}
 		
 		return ResultData.from("F-1", Utility.f("%d번 게시물은 존재하지 않습니다.", id)); 
-	}
-	public ResultData<ArrayList<Article>> doSearch(String keyword) {
-		ArrayList<Article> articles = repository.doSearch(keyword); 
-		if(articles != null) {
-			return ResultData.from("S-1", Utility.f("%s (으)로 검색한 결과 입니다.", keyword), articles.getClass().getSimpleName(), articles);
-		}
-		return ResultData.from("F-1", Utility.f("%s (을)를 포함하는 게시물이 존재하지 않습니다.", keyword));
 	}
 
 	public ResultData<Article> getForPrintArticle(String loginedMemberId, int id) {
