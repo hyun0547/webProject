@@ -19,6 +19,7 @@
 <link href="https://cdn.jsdelivr.net/npm/daisyui@1.16.2/dist/full.css" rel="stylesheet" type="text/css" />    
 
 <link rel="stylesheet" href="/resource/common.css"/>
+<link rel="shortcut icon" href="/favicon.ico">
 </head>
 <body>
 	<header>
