@@ -40,20 +40,22 @@ public class Rq {
 		}
 		
 	}
+	public void printReplaceJs(String msg, String uri) {
+		String script = Utility.jsReplace(msg, uri); 
+				
+		print(script);
+	}
 
 	public void printHistoryBackJs(String msg) {
-		String script = 
-				Utility.f("<script>"
-						+"alert('%s');"
-						+"history.back();"
-						+ "</script>", msg);
+		String script = Utility.jsHistoryBack(msg); 
+				
 		print(script);
 	}
 	
-	public void print(String msg) {
+	public void print(String script) {
 		try {
 			res.setContentType("text/html;charset=utf-8");
-			res.getWriter().append(msg);
+			res.getWriter().append(script);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

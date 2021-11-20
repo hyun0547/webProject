@@ -20,7 +20,7 @@ public class NeedLoginInterceptor implements HandlerInterceptor{
 			throws Exception {
 		
 		if(!rq.isLogined()) {
-			rq.printHistoryBackJs("해당 서비스는 로그인 후 이용 가능 합니다.");
+			rq.printReplaceJs("로그인 후 이용해 주세요", "/usr/member/showLogin");
 			return false;
 		}
 		
