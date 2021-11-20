@@ -6,6 +6,7 @@ import java.util.Iterator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -50,7 +51,7 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
-	public String doLogin(String loginId, String loginPw){
+	public String doLogin(String loginId, String loginPw, String afterLoginUri){
 		if(rq.isLogined()) {
 			return Utility.jsReplace("이미 로그인 되어 있습니다.", "/");
 		};
@@ -65,12 +66,21 @@ public class UsrMemberController {
 		
 		rq.setSession("loginedMember", loginedMember);
 		
-		return Utility.jsReplace(Utility.f("%s님 안녕하세요.", loginedMember.getNickname()), "/");
+		System.out.println(afterLoginUri);
+		
+		if(Utility.checkNull(afterLoginUri)) {
+			afterLoginUri = "/";
+		}
+		
+		return Utility.jsReplace(Utility.f("%s님 안녕하세요.", loginedMember.getNickname()), afterLoginUri);
 		
 	}
 	
 	@RequestMapping("/usr/member/showLogin")
-	public String showLogin(String loginId, String loginPw){
+	public String showLogin(Model model, String afterLoginUri){
+		
+		model.addAttribute("afterLoginUri", afterLoginUri);
+		System.out.println(afterLoginUri);
 		
 		return "/usr/member/login";
 	}

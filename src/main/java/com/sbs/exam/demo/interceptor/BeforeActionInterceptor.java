@@ -18,6 +18,7 @@ public class BeforeActionInterceptor implements HandlerInterceptor{
 	
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler)
 			throws Exception {
+		rq.removeSession("afterLoginUri");
 		req.setAttribute("rq", rq);
 		
 		return HandlerInterceptor.super.preHandle(req, resp, handler);

@@ -1,6 +1,9 @@
 package com.sbs.exam.demo.vo;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
+import org.yaml.snakeyaml.util.UriEncoder;
 
 import com.sbs.exam.demo.util.Utility;
 
@@ -67,5 +71,23 @@ public class Rq {
 
 	public void setSession(String key, Object arg) {
 		session.setAttribute(key, arg);
+	}
+	
+	public Object getSession(String key) {
+		return session.getAttribute(key);
+	}
+	
+	public String getEncodedUri(){
+		try {
+			return URLEncoder.encode(getCurrentUri(), "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public String getCurrentUri(){
+		return req.getRequestURI();
 	}
 }

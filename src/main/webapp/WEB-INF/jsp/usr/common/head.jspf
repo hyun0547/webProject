@@ -38,9 +38,7 @@
            		<li class="mb-1 btn-text-link"><a class="block" href="/usr/article/list?typeId=3">메모</a></li>
            	</ul>
 	      </li>
-	      <c:if test="${rq.isLogined()}">
 	      	<li><a href="/usr/article/showWrite" class="h-full block flex items-center px-3 mx-3 btn-text-link"><span>글쓰기</span></a></li>
-	      </c:if>
 	      <c:if test="${!rq.isLogined()}">
 	      	<li><a href="/usr/member/showLogin" class="h-full block flex items-center px-3 mx-3 btn-text-link"><span>로그인</span></a></li>
 	      </c:if>
