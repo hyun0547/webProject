@@ -2,8 +2,6 @@ package com.sbs.exam.demo.controller;
 
 import java.util.HashMap;
 import java.util.Iterator;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
