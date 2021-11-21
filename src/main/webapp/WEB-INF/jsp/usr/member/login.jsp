@@ -5,7 +5,7 @@
 <html lang="ko" class="light" data-theme="light">
 <head>
 <meta charset="UTF-8">
-<title>${pageTitle}</title>
+<title>로그인</title>
 <!-- 제이쿼리 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
 

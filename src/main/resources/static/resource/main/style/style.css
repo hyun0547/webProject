@@ -1,11 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap");
-@font-face {
-    font-family: 'LABµðÁöÅÐ';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/LABµðÁöÅÐ.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
 .today {
   top: 20%;
   left: 50%;
@@ -14,14 +6,10 @@
   width: 100%;
 }
 .today > div {
-  margin-bottom: 10px;
   font-weight: bold;
 }
-.hello {
-  font-size: 20px;
-}
 .date {
-  font-size: 50px;
+  font-size: 20px;
 }
 .clock {
   font-size: 40px;
@@ -68,5 +56,14 @@
   display: flex;
 }
 .clock-font{
-  font-family: "LABµðÁöÅÐ", "Orbitron", sans-serif;
+  font-family: "Orbitron", sans-serif;
+}
+.main-title{
+	color : #2AA79B;
+}
+.title > div{
+	font-family: 'Cafe24Shiningstar';
+	font-size : 80px;
+	font-weight : bold;
+	color : #2AA79B
 }

@@ -16,8 +16,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
 
 <!-- 데이지 UI -->
-<link href="https://cdn.jsdelivr.net/npm/daisyui@1.16.2/dist/full.css" rel="stylesheet" type="text/css" />    
-
+<link href="https://cdn.jsdelivr.net/npm/daisyui@1.16.2/dist/full.css" rel="stylesheet" type="text/css" />
+    
 <link rel="stylesheet" href="/resource/common.css"/>
 <link rel="shortcut icon" href="/favicon.ico">
 </head>
@@ -51,7 +51,7 @@
 	    </ul>
 	  </div>
 	</header>
-	<section class="mt-5">
-		<div class="container mx-auto px-3 text-xl title"><h1>${pageTitle}</h1></div>
+	<section class="mt-5 title">
+		<div class="container mx-auto px-3 text-xl">${pageTitle}</div>
 	</section> 
 	<main>

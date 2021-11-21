@@ -4,6 +4,19 @@
 	    font-weight: normal;
 	    font-style: normal;
 }
+@font-face {
+    font-family: 'KOTRAHOPE';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/KOTRAHOPE.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Cafe24Shiningstar';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Shiningstar.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 *{
 	font-family: 'GmarketSansMedium';
 }
@@ -24,4 +37,10 @@
 .article-menu:hover > .article-list {
   height: 90px;
   opacity: 1;
+}
+.kotra-font{
+	font-family: 'KOTRAHOPE';
+}
+.Cafe24-font{
+	font-family: 'Cafe24Shiningstar';
 }

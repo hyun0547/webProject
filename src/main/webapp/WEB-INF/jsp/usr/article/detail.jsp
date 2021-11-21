@@ -4,6 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<c:set var="pageTitle" value="게시물"/>
+
 <%@ include file="../common/head.jspf" %>
 <c:set var="article" value="${rd.data1}"/>
 	<section class="container mx-auto mt-5 px-3">
