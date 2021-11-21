@@ -114,8 +114,11 @@ public class UsrMemberController {
 			return Utility.jsHistoryBack("현재 로그인 되어있는 계정이 없습니다.");
 		};
 		
+		String afterLoginUri = rq.getBeforeUri();
+		
 		rq.removeSession("loginedMember");
-		return Utility.jsReplace("로그아웃 되었습니다.", "/");
+		
+		return Utility.jsReplace("로그아웃 되었습니다.", afterLoginUri);
 	}
 	
 	
