@@ -22,7 +22,12 @@
 <link rel="shortcut icon" href="/favicon.ico">
 </head>
 <body>
-	<section class="container mx-auto mt-56">
+	<section class="container mx-auto mt-32 flex items-center flex-col">
+		<div class="w-60">
+	    	<a href="/" class="flex items-center px-3">
+	    		<img alt="logo" src="/RYD-logo.png">
+	    	</a>
+	    </div>
 		<div class="mx-auto bg-green-50 flex py-20 w-2/3 rounded-xl">
 			<form class="flex flex-col mx-auto w-1/2" action="/usr/member/doLogin">
 				<input class="h-10 mb-5 text-center input input-bordered" type="text" placeholder="ID" name="loginId"/>
