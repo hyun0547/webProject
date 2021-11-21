@@ -28,7 +28,8 @@
 				<input class="h-10 mb-5 text-center input input-bordered" type="text" placeholder="ID" name="loginId"/>
 				<input class="h-10 mb-5 text-center input input-bordered" type="password" placeholder="PW" name="loginPw"/>
 				<input type="hidden" value="${afterLoginUri}" name="afterLoginUri"/>
-				<button class="bg-black text-white h-10 hover:bg-gray-400 duration-300">로그인</button>
+				<button class="bg-black text-white py-3 box-border hover:bg-gray-400 duration-300 mb-2 mt-3">로그인</button>
+				<a href="/usr/member/showJoin" class="bg-black text-white py-3 box-border hover:bg-gray-400 duration-300 text-center">회원가입</a>
 			</form>
 		</div>
 	</section>

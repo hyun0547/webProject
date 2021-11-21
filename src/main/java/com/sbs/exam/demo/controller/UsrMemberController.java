@@ -97,6 +97,11 @@ public class UsrMemberController {
 	@RequestMapping("/usr/member/showLogin")
 	public String showLogin(Model model){
 		String afterLoginUri = rq.getBeforeUri();
+		
+		if(afterLoginUri.toUpperCase().contains("LOGIN")) {
+			afterLoginUri = "/";
+		}
+		
 		model.addAttribute("afterLoginUri", afterLoginUri);
 		
 		return "/usr/member/login";
