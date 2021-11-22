@@ -14,6 +14,7 @@ public class Article {
 	String regDate;
     String updateDate;
     String memberLoginId;
+    int typeId;
     boolean extra__actorAuth;
     Member member;
 }

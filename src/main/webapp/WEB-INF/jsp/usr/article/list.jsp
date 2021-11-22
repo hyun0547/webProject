@@ -17,7 +17,14 @@
 <%@ include file="../common/head.jspf" %>
 	<section class="mt-5">
 		<div class="container mx-auto px-3 table-box1">
-			<div class="float-right mr-2">
+			<div class="flex justify-between mr-2 items-center">
+				<div>
+					<c:if test="${searchKeyword != null}">
+						<span>
+							'${searchKeyword}' (으)로 검색한 결과 입니다.
+						</span>
+					</c:if>
+				</div>
 				<form class="flex items-center" action="/usr/article/list">
 					<input type="hidden" name="typeId" value="${typeRd.data1.id}" />
 					<input class="input input-bordered mr-2" type="text" name="searchKeyword"/>
@@ -40,7 +47,7 @@
 				<c:forEach var="article" items="${articleRd.data1}">
 					<tr>
 						<td class="text-center">${article.id}</td>
-						<td class="text-center btn-text-link"><a href="/usr/article/detail?id=${article.id}">${article.title}</a></td>
+						<td class="text-center btn-text-link"><a href="/usr/article/detail?id=${article.id}&searchKeyword=${searchKeyword}">${article.title}</a></td>
 						<td class="text-right">${article.memberLoginId}</td>
 						<td class="text-right">
 							<fmt:parseDate var="parsedDate" value="${article.regDate}" pattern="yyyy-mm-dd HH:mm:ss"/>

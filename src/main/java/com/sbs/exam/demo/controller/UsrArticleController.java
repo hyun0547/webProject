@@ -33,7 +33,7 @@ public class UsrArticleController {
 		
 		model.addAttribute("articleRd", articleRd);
 		model.addAttribute("typeRd", typeRd);
-		System.out.println(typeRd);
+		model.addAttribute("searchKeyword", searchKeyword);
 		
 		return "/usr/article/list";
 	}
@@ -58,10 +58,10 @@ public class UsrArticleController {
 	@ResponseBody
 	public String doDelete (int id, String afterDeleteUri) {
 	
-	
 		ResultData<Integer> rd = articleService.doDelete(id, rq.getLoginedMember());
 		
 		if(rd.isSuccess()) {
+			System.out.println(afterDeleteUri);
 			return Utility.jsReplace(rd.getMsg(), afterDeleteUri);
 		}
 		
@@ -101,10 +101,13 @@ public class UsrArticleController {
 	}
 	
 	@RequestMapping("/usr/article/detail")
-	public String getForPrintArticle(Model model, int id) {
+	public String getForPrintArticle(Model model, int id, String searchKeyword) {
+		ResultData<Article> articleRd = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 		
-		
-		model.addAttribute("rd", articleService.getForPrintArticle(rq.getLoginedMemberId(), id));
+		String afterDeleteUri = rq.getEncodedUri(Utility.f("/usr/article/list?typeId=%d&searchKeyword=%s", articleRd.getData1().getTypeId(), searchKeyword));
+		System.out.println(afterDeleteUri);
+		model.addAttribute("afterDeleteUri", afterDeleteUri);
+		model.addAttribute("articleRd", articleRd);
 		
 		return "/usr/article/detail";
 	}

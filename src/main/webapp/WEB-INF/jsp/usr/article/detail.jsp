@@ -7,7 +7,7 @@
 <c:set var="pageTitle" value="게시물"/>
 
 <%@ include file="../common/head.jspf" %>
-<c:set var="article" value="${rd.data1}"/>
+<c:set var="article" value="${articleRd.data1}"/>
 	<section class="container mx-auto mt-5 px-3">
 		<div class="flex justify-between items-center">
 			<h1 class="text-2xl">${article.title}</h1>
@@ -28,7 +28,7 @@
 					<a class="mr-3 btn-text-link" href="/usr/article/showModify?id=${article.id}">수정</a>
 				</c:if>
 				<c:if test="${article.extra__actorAuth}">
-					<a class="btn-text-link" onclick="if(confirm('삭제 하시겠습니까?') == false){return false;}" href="/usr/article/doDelete?id=${article.id}&afterDeleteUri">삭제</a>
+					<a class="btn-text-link" onclick="if(confirm('삭제 하시겠습니까?') == false){return false;}" href="/usr/article/doDelete?id=${article.id}&afterDeleteUri=${afterDeleteUri}">삭제</a>
 				</c:if>
 			</div>
 		</div>

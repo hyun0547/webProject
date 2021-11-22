@@ -11,6 +11,7 @@
 	   <result property="regDate" column="regDate" />
 	   <result property="updateDate" column="updateDate" />
 	   <result property="memberLoginId" column="memberLoginId" />
+	   <result property="typeId" column="typeId" />
 	        <association property="member"  javaType="Member" >
 	             <id property="loginId"  column="loginId" />
 	             <result property="authLevel"  column="authLevel" />

@@ -77,9 +77,9 @@ public class Rq {
 		return session.getAttribute(key);
 	}
 	
-	public String getEncodedUri(){
+	public String getEncodedUri(String uri){
 		try {
-			return URLEncoder.encode(getCurrentUri(), "UTF-8");
+			return URLEncoder.encode(uri, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
