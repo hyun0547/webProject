@@ -58,6 +58,11 @@
 				</c:forEach>
 			</table>
 		</div>
+		<div class="text-center mt-2">
+			<a onclick="if(${curPage <= 1}){return false;}" href="/usr/article/list?typeId=1&curPage=${curPage-1}">&#60</a>
+			<span class="mx-3">${curPage}/${allPages}</span>
+			<a onclick="if(${curPage >= allPages}){return false;}" href="/usr/article/list?typeId=${typeRd.data1.id}&curPage=${curPage+1}">&#62</a>
+		</div>
 	</section>
 	
 <%@ include file="../common/foot.jspf" %>

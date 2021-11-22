@@ -13,7 +13,9 @@ public interface ArticleRepository {
 	
 		public Article getArticle(@Param("id") int id);
 		
-		public ArrayList<Article> getArticles(@Param("typeId") int typeId, @Param("searchKeyword") String searchKeyword);
+		public ArrayList<Article> getArticles(@Param("typeId") int typeId, @Param("searchKeyword") String searchKeyword, @Param("limitStart") int limitStart, @Param("limitRange") int limitRange);
+		
+		public int getAllArticleCount(@Param("typeId") int typeId);
 		
 		public int getLastInsert();
 		

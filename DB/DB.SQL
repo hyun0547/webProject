@@ -159,3 +159,12 @@ ALTER TABLE article ADD typeId INT(10) UNSIGNED NOT NULL;
 UPDATE article SET typeId=1 WHERE typeId=0;
 
 ALTER TABLE article ADD FOREIGN KEY(typeId) REFERENCES article_type(id);
+
+SELECT * FROM article_type WHERE id = 1;
+
+INSERT INTO article
+(
+    regDate, updateDate, memberLoginId, typeId, title, `body`
+)
+SELECT NOW(), NOW(), CONCAT('testUser',ROUND(RAND()*1+1)), FLOOR(RAND() * 3 + 1), CONCAT('제목_',RAND()*200+1), CONCAT('내용_',RAND()*200+1)
+FROM article;

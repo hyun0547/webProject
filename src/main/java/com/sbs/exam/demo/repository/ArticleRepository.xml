@@ -37,6 +37,15 @@
 			</if>
 		</where>
 		ORDER BY ID DESC
+		LIMIT #{limitStart}, #{limitRange}
+	</select>
+	
+	<select id="getAllArticleCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM article
+		<if test="typeId != 0">
+			WHERE typeId = #{typeId}
+		</if>
 	</select>
 	
 	<select id="getLastInsert" resultType="int">

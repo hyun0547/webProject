@@ -19,9 +19,11 @@ public class ArticleService {
 		this.repository = repository;
 	}
 	
-	public ResultData<ArrayList<Article>> getArticles(Member loginedMember, int typeId, String searchKeyword) {
+	public ResultData<ArrayList<Article>> getArticles(Member loginedMember, int typeId, String searchKeyword, int page) {
+		int limitRange = 10;
+		int limitStart = (page - 1) * 10;
 		
-		ArrayList<Article> articles = repository.getArticles(typeId, searchKeyword);
+		ArrayList<Article> articles = repository.getArticles(typeId, searchKeyword, limitStart, limitRange);
 		
 		if(loginedMember != null) {
 			for(Article article : articles) {
@@ -30,6 +32,10 @@ public class ArticleService {
 		}
 		
 		return ResultData.from("S-1", "전체 게시물 입니다.", articles.getClass().getSimpleName(), articles);
+	}
+	
+	public ResultData<Integer> getAllArticleCount(int typeId){
+		return ResultData.from("S-1", "전체 게시글 수", "Integer", repository.getAllArticleCount(typeId));
 	}
 	
 	

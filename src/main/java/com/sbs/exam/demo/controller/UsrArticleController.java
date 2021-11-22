@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.sbs.exam.demo.repository.ArticleRepository;
 import com.sbs.exam.demo.service.ArticleService;
 import com.sbs.exam.demo.service.ArticleTypeService;
 import com.sbs.exam.demo.util.Utility;
@@ -27,10 +30,18 @@ public class UsrArticleController {
 	}
 	
 	@RequestMapping("/usr/article/list")
-	public String getArticles (Model model, int typeId, String searchKeyword) {
-		ResultData<ArrayList<Article>> articleRd = articleService.getArticles(rq.getLoginedMember(), typeId, searchKeyword);
+	public String getArticles (Model model, int typeId, String searchKeyword, @RequestParam(defaultValue = "1") int curPage) {
+		
+		ResultData<ArrayList<Article>> articleRd = articleService.getArticles(rq.getLoginedMember(), typeId, searchKeyword, curPage);
 		ResultData<ArticleType> typeRd = articleTypeService.getType(typeId);
 		
+		ResultData<Integer> allArticles = articleService.getAllArticleCount(typeId);
+		int allArticlesCount = allArticles.getData1();
+		int allPages = allArticlesCount % 10 == 0 ? allArticlesCount / 10 : allArticlesCount / 10 + 1;
+		
+		model.addAttribute("allArticle", allArticles);
+		model.addAttribute("allPages", allPages);
+		model.addAttribute("curPage", curPage);
 		model.addAttribute("articleRd", articleRd);
 		model.addAttribute("typeRd", typeRd);
 		model.addAttribute("searchKeyword", searchKeyword);
