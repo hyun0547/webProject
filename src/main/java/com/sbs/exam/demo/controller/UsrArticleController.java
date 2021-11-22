@@ -56,13 +56,13 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public String doDelete (int id) {
+	public String doDelete (int id, String afterDeleteUri) {
 	
 	
 		ResultData<Integer> rd = articleService.doDelete(id, rq.getLoginedMember());
 		
 		if(rd.isSuccess()) {
-			return Utility.jsReplace(rd.getMsg(), "/usr/article/list");
+			return Utility.jsReplace(rd.getMsg(), afterDeleteUri);
 		}
 		
 		return Utility.jsHistoryBack(rd.getMsg());
@@ -108,5 +108,6 @@ public class UsrArticleController {
 		
 		return "/usr/article/detail";
 	}
+	
 	
 }

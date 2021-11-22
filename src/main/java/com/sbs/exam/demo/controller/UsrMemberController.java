@@ -65,6 +65,14 @@ public class UsrMemberController {
 		return "/usr/member/join";
 	}
 	
+	@RequestMapping("/usr/member/getLoginIdDup")
+	@ResponseBody
+	public String getLoginIdDup(String loginId){
+		
+		ResultData<Object> rd = service.getLoginIdDup(loginId);
+		return rd.getMsg();
+	}
+	
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
 	public String doLogin(String loginId, String loginPw, String afterLoginUri){

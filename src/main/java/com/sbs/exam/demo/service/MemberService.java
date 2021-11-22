@@ -45,6 +45,14 @@ public class MemberService {
 		
 		return ResultData.from("F-2", "비밀번호를 확인해 주세요");
 	}
+	
+	public ResultData<Object> getLoginIdDup(String loginId) {
+		if(repository.loginIdOverlap(loginId) > 0) {
+			return ResultData.from("F-1", "이미 사용중인 아이디 입니다.");
+		}
+		
+		return ResultData.from("S-1", "사용 가능한 아이디 입니다.");
+	}
 
 }
  

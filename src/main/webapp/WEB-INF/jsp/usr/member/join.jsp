@@ -26,7 +26,10 @@
 		<section class="max-w-2xl mx-auto mt-10 bg-green-50 p-5">
 			<div class="mx-auto w-1/2">
 				<form class="mx-auto w-full" action="/usr/member/doJoin">
-  						<input type="text" placeholder="아이디" class="input input-bordered w-full mb-8" name="loginId" required>
+  						<input type="text" placeholder="아이디" class="input input-bordered w-full input-id" name="loginId" required>
+  						<div class="h-8 px-2 mt-1">
+  							<span id="idVaildation"></span>
+  						</div>
   						<input type="password" placeholder="비밀번호" class="input input-bordered w-full mb-2" name="loginPw" required>
   						<input type="password" placeholder="비밀번호 확인" class="input input-bordered w-full mb-8" required>
   						<input type="text" placeholder="이름" class="input input-bordered w-full mb-4" name="name" required>
@@ -42,4 +45,27 @@
 		</section>
 	</main>
 </body>
+<script>
+	const inputId = document.querySelector(".input-id");
+	
+	inputId.addEventListener( "keyup", function (){
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "/usr/member/getLoginIdDup?loginId="+inputId.value, true);
+		xhr.send();
+		
+		xhr.onreadystatechange = function(){
+			const idVaildation = document.getElementById("idVaildation");
+			if(inputId.value.trim().length == 0){
+				idVaildation.innerText = "";
+			}
+			else{
+				if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
+					idVaildation.innerText = xhr.responseText;
+				}
+			}
+		}
+	})
+
+	
+</script>
 </html>
