@@ -1,11 +1,15 @@
 package com.sbs.exam.demo.controller;
 
 import java.util.ArrayList;
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 
 import com.sbs.exam.demo.repository.ArticleRepository;
 import com.sbs.exam.demo.service.ArticleService;
@@ -51,7 +55,8 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public String doAdd (String title, String body, int typeId) {
+	public String doAdd (String title, String body, int typeId, MultipartRequest mr) {
+		Map<String, MultipartFile> fileMap = mr.getFileMap();
 		ResultData<Article> rd = articleService.doAdd(title, body, typeId, rq.getLoginedMember());
 		return Utility.jsReplace(rd.getMsg(), "/usr/article/detail?id=" + rd.getData1().getId());
 	}

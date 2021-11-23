@@ -171,7 +171,6 @@ INSERT INTO article
 SELECT NOW(), NOW(), CONCAT('testUser',ROUND(RAND()*1+1)), FLOOR(RAND() * 3 + 1), CONCAT('제목_',RAND()*200+1), CONCAT('내용_',RAND()*200+1)
 FROM article;
 
-# 파일 테이블
 CREATE TABLE genFile(
  id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT, # 번호
  regDate DATETIME DEFAULT NULL, # 작성날짜
@@ -183,7 +182,7 @@ CREATE TABLE genFile(
  originFileName VARCHAR(100) NOT NULL, # 업로드 당시의 파일이름
  fileExt VARCHAR(10) NOT NULL, # 확장자
  typeCode VARCHAR(20) NOT NULL, # 종류코드(common)
- type2Code VARCHAR(20) NOT NULL, # 종류2코드(attatchment)
+ type2Code VARCHAR(20) NOT NULL, # 종류2코드(attachment)
  fileSize INT(10) UNSIGNED NOT NULL, # 파일의 사이즈
  fileExtTypeCode VARCHAR(10) NOT NULL, # 파일규격코드
  fileExtType2Code VARCHAR(10) NOT NULL, # 파일규격2코드
