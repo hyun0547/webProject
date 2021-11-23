@@ -72,7 +72,6 @@ public class UsrArticleController {
 		ResultData<Integer> rd = articleService.doDelete(id, rq.getLoginedMember());
 		
 		if(rd.isSuccess()) {
-			System.out.println(afterDeleteUri);
 			return Utility.jsReplace(rd.getMsg(), afterDeleteUri);
 		}
 		
@@ -116,7 +115,6 @@ public class UsrArticleController {
 		ResultData<Article> articleRd = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 		
 		String afterDeleteUri = rq.getEncodedUri(Utility.f("/usr/article/list?typeId=%d&searchKeyword=%s", articleRd.getData1().getTypeId(), searchKeyword));
-		System.out.println(afterDeleteUri);
 		model.addAttribute("afterDeleteUri", afterDeleteUri);
 		model.addAttribute("articleRd", articleRd);
 		
