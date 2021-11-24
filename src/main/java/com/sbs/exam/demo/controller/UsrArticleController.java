@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
-
-import com.sbs.exam.demo.repository.ArticleRepository;
 import com.sbs.exam.demo.service.ArticleService;
 import com.sbs.exam.demo.service.ArticleTypeService;
+import com.sbs.exam.demo.service.GenFileService;
 import com.sbs.exam.demo.util.Utility;
 import com.sbs.exam.demo.vo.Article;
 import com.sbs.exam.demo.vo.ArticleType;
+import com.sbs.exam.demo.vo.GenFile;
 import com.sbs.exam.demo.vo.ResultData;
 import com.sbs.exam.demo.vo.Rq;
 
@@ -24,13 +24,15 @@ import com.sbs.exam.demo.vo.Rq;
 public class UsrArticleController {
 	
 	private Rq rq;
-	
 	ArticleService articleService;
 	ArticleTypeService articleTypeService;
-	public UsrArticleController(ArticleService articleService, Rq rq, ArticleTypeService articleTypeService) {
+	GenFileService genFileService; 
+	
+	public UsrArticleController(ArticleService articleService, Rq rq, ArticleTypeService articleTypeService, com.sbs.exam.demo.service.GenFileService genFileService) {
 		this.rq = rq;
 		this.articleService = articleService;
 		this.articleTypeService = articleTypeService;
+		this.genFileService = genFileService;
 	}
 	
 	@RequestMapping("/usr/article/list")
@@ -56,9 +58,41 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
 	public String doAdd (String title, String body, int typeId, MultipartRequest mr) {
+		ResultData<Article> articleRd = articleService.doAdd(title, body, typeId, rq.getLoginedMember());
+		Article newArticle = articleRd.getData1();
+		
 		Map<String, MultipartFile> fileMap = mr.getFileMap();
-		ResultData<Article> rd = articleService.doAdd(title, body, typeId, rq.getLoginedMember());
-		return Utility.jsReplace(rd.getMsg(), "/usr/article/detail?id=" + rd.getData1().getId());
+		
+		for(String fileInputName : fileMap.keySet()) {
+			MultipartFile mf = fileMap.get(fileInputName);
+			String fileInputNameBits[] = mf.getName().split("__");
+			
+			if(fileInputNameBits[0].equals("file") == false) {
+				continue;
+			}
+			
+			long fileSize = mf.getSize();
+			
+			if(fileSize <= 0) {
+				continue;
+			}
+			
+			String relTypeCode = fileInputNameBits[1];
+			int relId = newArticle.getId();
+			String originFileName = mf.getOriginalFilename();
+			String fileExt = Utility.getFileExtFromFileName(originFileName);
+			String typeCode = fileInputNameBits[3]; 
+			String type2Code = fileInputNameBits[4]; 
+			String fileExtTypeCode = Utility.getFileExtTypeCodeFromFileName(originFileName);
+			String fileExtType2Code = Utility.getFileExtType2CodeFromFileName(originFileName);
+			int fileNo = Integer.parseInt(fileInputNameBits[2]);
+			String fileDir = Utility.getNowYearMonthDateStr();
+			
+			
+			genFileService.save(relTypeCode, relId, originFileName, fileExt, typeCode, type2Code, fileSize, fileExtTypeCode, fileExtType2Code, fileNo, fileDir);
+		}
+		
+		return Utility.jsReplace(articleRd.getMsg(), "/usr/article/detail?id=" + articleRd.getData1().getId());
 	}
 	
 	@RequestMapping("/usr/article/showWrite")

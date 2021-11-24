@@ -28,7 +28,7 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public String doJoin(@ModelAttribute Member newMember ) {
+	public String doJoin(@ModelAttribute Member newMember) {
 		ResultData<Member> rd = null;
 		
 		HashMap<String, String> joinParam = new HashMap<>();
