@@ -2,7 +2,6 @@ package com.sbs.exam.demo.controller;
 
 import java.util.ArrayList;
 import java.util.Map;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +15,6 @@ import com.sbs.exam.demo.service.GenFileService;
 import com.sbs.exam.demo.util.Utility;
 import com.sbs.exam.demo.vo.Article;
 import com.sbs.exam.demo.vo.ArticleType;
-import com.sbs.exam.demo.vo.GenFile;
 import com.sbs.exam.demo.vo.ResultData;
 import com.sbs.exam.demo.vo.Rq;
 
@@ -63,34 +61,7 @@ public class UsrArticleController {
 		
 		Map<String, MultipartFile> fileMap = mr.getFileMap();
 		
-		for(String fileInputName : fileMap.keySet()) {
-			MultipartFile mf = fileMap.get(fileInputName);
-			String fileInputNameBits[] = mf.getName().split("__");
-			
-			if(fileInputNameBits[0].equals("file") == false) {
-				continue;
-			}
-			
-			long fileSize = mf.getSize();
-			
-			if(fileSize <= 0) {
-				continue;
-			}
-			
-			String relTypeCode = fileInputNameBits[1];
-			int relId = newArticle.getId();
-			String originFileName = mf.getOriginalFilename();
-			String fileExt = Utility.getFileExtFromFileName(originFileName);
-			String typeCode = fileInputNameBits[3]; 
-			String type2Code = fileInputNameBits[4]; 
-			String fileExtTypeCode = Utility.getFileExtTypeCodeFromFileName(originFileName);
-			String fileExtType2Code = Utility.getFileExtType2CodeFromFileName(originFileName);
-			int fileNo = Integer.parseInt(fileInputNameBits[2]);
-			String fileDir = Utility.getNowYearMonthDateStr();
-			
-			
-			genFileService.save(relTypeCode, relId, originFileName, fileExt, typeCode, type2Code, fileSize, fileExtTypeCode, fileExtType2Code, fileNo, fileDir);
-		}
+		ResultData<ArrayList<String>> fileRd = genFileService.save(fileMap, newArticle.getId());
 		
 		return Utility.jsReplace(articleRd.getMsg(), "/usr/article/detail?id=" + articleRd.getData1().getId());
 	}

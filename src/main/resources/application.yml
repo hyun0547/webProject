@@ -13,3 +13,5 @@ spring:
     password:
 mybatis:
   type-aliases-package: com.sbs.exam.demo.vo
+custom:
+  genFileDirPath: C:/hyunsu/webproject-file
