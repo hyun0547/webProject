@@ -1,9 +1,11 @@
 package com.sbs.exam.demo.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.sbs.exam.demo.interceptor.BeforeActionInterceptor;
 import com.sbs.exam.demo.interceptor.NeedLoginInterceptor;
@@ -12,6 +14,8 @@ import com.sbs.exam.demo.interceptor.NeedLogoutInterceptor;
 
 @Configuration
 public class MyWebConfig implements WebMvcConfigurer{
+	@Value("${custom.genFileDirPath}")
+	String genFileDirPath;
 	
 	@Autowired
 	BeforeActionInterceptor beforeActionInterceptor;
@@ -31,5 +35,9 @@ public class MyWebConfig implements WebMvcConfigurer{
 		
 		InterceptorRegistration needLogoutIr = registry.addInterceptor(needLogoutInterceptor);
 		needLogoutIr.addPathPatterns("/usr/member/**Login**");
+	}
+	
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/gen/**").addResourceLocations("file:///" + genFileDirPath + "/");
 	}
 }

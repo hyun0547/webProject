@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import com.sbs.exam.demo.repository.GenFileRepository;
 import com.sbs.exam.demo.util.Utility;
+import com.sbs.exam.demo.vo.GenFile;
 import com.sbs.exam.demo.vo.ResultData;
 
 @Service
@@ -82,6 +83,10 @@ public class GenFileService {
 		}
 		return ResultData.from("S-1", "업로드된 파일들", fileNames.getClass().getSimpleName(), fileNames);
 		
+	}
+
+	public GenFile getFileForRel(int relId, String relTypeCode) {
+		return genFileRepository.getFileForRel(relId, relTypeCode);
 	}
 
 }

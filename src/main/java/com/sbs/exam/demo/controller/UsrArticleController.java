@@ -15,6 +15,7 @@ import com.sbs.exam.demo.service.GenFileService;
 import com.sbs.exam.demo.util.Utility;
 import com.sbs.exam.demo.vo.Article;
 import com.sbs.exam.demo.vo.ArticleType;
+import com.sbs.exam.demo.vo.GenFile;
 import com.sbs.exam.demo.vo.ResultData;
 import com.sbs.exam.demo.vo.Rq;
 
@@ -123,8 +124,13 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/detail")
 	public String getForPrintArticle(Model model, int id, String searchKeyword) {
 		ResultData<Article> articleRd = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
+		GenFile attachFile = genFileService.getFileForRel(id, "article");
 		
 		String afterDeleteUri = rq.getEncodedUri(Utility.f("/usr/article/list?typeId=%d&searchKeyword=%s", articleRd.getData1().getTypeId(), searchKeyword));
+		
+		if(attachFile != null) {
+			model.addAttribute("attachFileUrl", attachFile.getForPrintDir());
+		}
 		model.addAttribute("afterDeleteUri", afterDeleteUri);
 		model.addAttribute("articleRd", articleRd);
 		

@@ -39,4 +39,8 @@
 		)
 	</insert>
 	
+	<select id="getFileForRel" resultType="GenFile">
+		SELECT * FROM genFile WHERE relId=#{relId} AND relTypeCode=#{relTypeCode}
+	</select>
+	
 </mapper>

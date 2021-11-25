@@ -25,20 +25,7 @@ public class GenFile {
 	private int fileNo;
 	private String fileDir;
 	
-	//excluded auto query value
-	public GenFile(String relTypeCode, int relId, String originFileName, String fileExt, String typeCode,
-			String type2Code, long fileSize, String fileExtTypeCode, String fileExtType2Code, int fileNo,
-			String fileDir) {
-		this.relTypeCode = relTypeCode;
-		this.relId = relId;
-		this.originFileName = originFileName;
-		this.fileExt = fileExt;
-		this.typeCode = typeCode;
-		this.typeCode = typeCode;
-		this.fileSize = fileSize;
-		this.fileExtTypeCode = fileExtTypeCode;
-		this.fileExtTypeCode = fileExtTypeCode;
-		this.fileNo = fileNo;
-		this.fileDir = fileDir; 
+	public String getForPrintDir() {
+		return "/gen/" + relTypeCode + "/" + fileDir + "/" + relId + "__" + fileNo + "." + fileExt;
 	}
 }

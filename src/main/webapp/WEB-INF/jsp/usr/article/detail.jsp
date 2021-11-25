@@ -19,6 +19,12 @@
 		<div class="h-1 bg-gray-200 mt-5"></div>
 		<div class="mt-10 px-10">
 			${article.body}
+			
+			<c:if test="${attachFileUrl != null }">
+				<div class="flex w-1/2">
+					<img class="w-full" src="${attachFileUrl}" alt="" />
+				</div>
+			</c:if>
 		</div>
 		<div class="h-1 bg-gray-200 mt-5"></div>
 		<div class="mt-5 flex justify-between">
