@@ -115,7 +115,7 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/logout")
 	@ResponseBody
-	public String logout(HttpSession session){
+	public String logout(){
 		if(!rq.isLogined()) {
 			return Utility.jsHistoryBack("현재 로그인 되어있는 계정이 없습니다.");
 		};
@@ -127,5 +127,9 @@ public class UsrMemberController {
 		return Utility.jsReplace("로그아웃 되었습니다.", afterLoginUri);
 	}
 	
+	@RequestMapping("/usr/member/showProfile")
+	public String showProfile(){
+		return "/usr/member/profile";
+	}
 	
 }
