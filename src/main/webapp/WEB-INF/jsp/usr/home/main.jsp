@@ -10,11 +10,11 @@
 <section>
     <div class="today absolute flex flex-col">
       <div class="date">00 00 일요일</div>
-      <div class="hello text-5xl my-3 kotra-font">hello</div>
+      <div class="hello text-2xl my-3"></div>
       <div class="clock clock-font">00:00</div>
     </div>
 
-    <div class="form-wrap flex flex-col absolute mt-3">
+    <div class="form-wrap flex flex-col absolute">
       <form class="search-form mb-2">
         <input class="search input input input-bordered" type="text" placeholder="Google" required />
       </form>
