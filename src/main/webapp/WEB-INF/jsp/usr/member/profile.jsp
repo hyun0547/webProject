@@ -15,11 +15,15 @@
   			</div>
 	  			<span class="text-xl">${member.name}</span>
 		</div>
-		<div class="w-2/4 mx-auto bg-gray-200 text-gray-600 flex flex-col text-center">
-			<span>내 회원 등급 : ${member.authLevel}</span>
-  			<span>이메일 : ${member.email}</span>
-  			<span>닉네임 : ${member.nickname}</span>
-  			<span>전화번호 : ${member.cellphoneNo}</span>
+		<div class="w-2/4 mx-auto flex justify-between">
+			<div></div>
+		 	<a class="hover:text-gray-400 duration-200" href="/usr/member/showModifyProfile">수정하기</a>
+		</div>
+		<div class="w-2/4 mx-auto bg-gray-200 text-gray-600 flex flex-col text-center py-5">
+			<span class="mb-2">내 회원 등급 : ${member.authLevel}</span>
+  			<span class="mb-2">이메일 : ${member.email}</span>
+  			<span class="mb-2">닉네임 : ${member.nickname}</span>
+  			<span class="mb-2">전화번호 : ${member.cellphoneNo}</span>
 		</div> 
 	</section>
 <%@ include file="../common/foot.jspf" %>

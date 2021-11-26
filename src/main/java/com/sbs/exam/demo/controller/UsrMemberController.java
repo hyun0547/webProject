@@ -132,4 +132,9 @@ public class UsrMemberController {
 		return "/usr/member/profile";
 	}
 	
+	@RequestMapping("/usr/member/showModifyProfile")
+	public String showModifyProfile(){
+		return "/usr/member/modifyProfile";
+	}
+	
 }
