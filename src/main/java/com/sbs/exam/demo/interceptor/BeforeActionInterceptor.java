@@ -18,6 +18,13 @@ public class BeforeActionInterceptor implements HandlerInterceptor{
 	
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler)
 			throws Exception {
+		if(req.getParameter("privateType") != null){
+			if(req.getParameter("privateType").equals("1") && !rq.isLogined()) {
+				rq.printReplaceJs("로그인 후 이용해 주세요", "/usr/member/showLogin");
+				return false;
+			}
+		}
+		
 		req.setAttribute("rq", rq);
 		
 		return HandlerInterceptor.super.preHandle(req, resp, handler);

@@ -32,12 +32,20 @@
 	    <div class="flex-grow"></div>
 	    <ul class="flex">
 	      <li><a href="/usr/home/main" class="h-full block flex items-center px-3 mx-3 btn-text-link"><span>홈</span></a></li>
+	      <c:if test="${rq.isLogined()}">
+		      <li class="h-full block flex items-center px-3 mx-3 article-menu">
+	      		<span class="cursor-pointer btn-text-link">다이어리</span>
+	      		<ul class="overflow-hidden absolute article-list top-14 duration-300 h-0 opacity-0">
+	           		<li class="mb-1 btn-text-link"><a class="block" href="/usr/article/list?typeId=1&privateType=1">스터디 로그</a></li>
+	           		<li class="mb-1 btn-text-link"><a class="block" href="/usr/article/list?typeId=2&privateType=1">일기</a></li>
+	           		<li class="mb-1 btn-text-link"><a class="block" href="/usr/article/list?typeId=3&privateType=1">메모</a></li>
+	           	</ul>
+		      </li>
+	      </c:if>
 	      <li class="h-full block flex items-center px-3 mx-3 article-menu">
       		<span class="cursor-pointer btn-text-link">게시판</span>
       		<ul class="overflow-hidden absolute article-list top-14 duration-300 h-0 opacity-0">
-           		<li class="mb-1 btn-text-link"><a class="block" href="/usr/article/list?typeId=1">스터디 로그</a></li>
-           		<li class="mb-1 btn-text-link"><a class="block" href="/usr/article/list?typeId=2">일기</a></li>
-           		<li class="mb-1 btn-text-link"><a class="block" href="/usr/article/list?typeId=3">메모</a></li>
+           		<li class="mb-1 btn-text-link"><a class="block" href="/usr/article/list?typeId=4">자유 게시판</a></li>
            	</ul>
 	      </li>
 	      	<li><a href="/usr/article/showWrite" class="h-full block flex items-center px-3 mx-3 btn-text-link"><span>글쓰기</span></a></li>

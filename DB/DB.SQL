@@ -154,6 +154,19 @@ INSERT INTO `sbs_s_2021_10`.`article_type`
 	NOW(), 
 	'메모'
 	);
+	
+INSERT INTO `sbs_s_2021_10`.`article_type` 
+	(
+	`regDate`, 
+	`updateDate`, 
+	`typeName`
+	)
+	VALUES
+	(
+	NOW(), 
+	NOW(), 
+	'자유게시판'
+	);
 
 ALTER TABLE article ADD typeId INT(10) UNSIGNED NOT NULL;
 
@@ -190,3 +203,4 @@ CREATE TABLE genFile(
  fileDir VARCHAR(20) NOT NULL, # 파일이 저장되는 폴더명
  KEY relId (relId,relTypeCode,typeCode,type2Code,fileNo)
 );
+

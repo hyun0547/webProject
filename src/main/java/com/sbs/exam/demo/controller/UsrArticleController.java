@@ -35,7 +35,7 @@ public class UsrArticleController {
 	}
 	
 	@RequestMapping("/usr/article/list")
-	public String getArticles (Model model, int typeId, String searchKeyword, @RequestParam(defaultValue = "1") int curPage) {
+	public String getArticles (Model model, int typeId, String searchKeyword, @RequestParam(defaultValue = "1") int curPage,@RequestParam(defaultValue = "0") int privateType) {
 		
 		ResultData<ArrayList<Article>> articleRd = articleService.getArticles(rq.getLoginedMember(), typeId, searchKeyword, curPage);
 		ResultData<ArticleType> typeRd = articleTypeService.getType(typeId);
