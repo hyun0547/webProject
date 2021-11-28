@@ -28,12 +28,16 @@
 		SELECT * 
 		FROM ARTICLE
 		<where>
+			privateType = #{privateType}
 			<if test="typeId != 0">
-				typeId=#{typeId}
+				AND typeId=#{typeId}
 			</if>
 			<if test="searchKeyword != null">
-				AND (TITLE LIKE CONCAT('%', #{searchKeyword}, '%')  
-				OR BODY LIKE CONCAT('%', #{searchKeyword}, '%'))
+				(AND (TITLE LIKE CONCAT('%', #{searchKeyword}, '%')  
+				OR BODY LIKE CONCAT('%', #{searchKeyword}, '%')))
+			</if>
+			<if test="privateType == 1">
+				AND memberLoginId = #{memberLoginId}
 			</if>
 		</where>
 		ORDER BY ID DESC
@@ -43,9 +47,17 @@
 	<select id="getAllArticleCount" resultType="int">
 		SELECT COUNT(*) 
 		FROM article
-		<if test="typeId != 0">
-			WHERE typeId = #{typeId}
-		</if>
+		<where>
+			privateType = #{privateType}
+			<if test="typeId != 0">
+				AND typeId = #{typeId}
+			</if>
+			<if test="privateType == 1">
+				AND memberLoginId = #{loginedMemberId}
+			</if>
+		</where>
+		
+		
 	</select>
 	
 	<select id="getLastInsert" resultType="int">

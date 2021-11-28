@@ -14,4 +14,5 @@ public class ArticleType {
     String typeName;
     int delStatus;
     String delDate;
+    int privateType;
 }
