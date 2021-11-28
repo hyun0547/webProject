@@ -30,8 +30,8 @@
 </section>
     <ul class="todo-list absolute"></ul>
 
-<script src="/resource/main/script/clock.js"></script>
 <script src="/resource/main/script/hello.js"></script>
+<script src="/resource/main/script/clock.js"></script>
 <script src="/resource/main/script/todo.js"></script>
 <script src="/resource/main/script/search.js"></script>
 <%@ include file="../common/foot.jspf" %>

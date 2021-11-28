@@ -1,9 +1,4 @@
-const hello = document.querySelector(".hello"),
-  time = document.querySelector(".clock"),
-  today = document.querySelector(".date");
-
-const week = today.innerText.substring(today.innerText.lastIndexOf(" ") + 1);
-const hour = parseInt(time.innerText.substring(0, 2));
+const hello = document.querySelector(".hello");
 
 fetch(`https://api.adviceslip.com/advice`)
 	.then((Response) => Response.json())

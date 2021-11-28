@@ -35,8 +35,8 @@ public class ArticleService {
 	}
 	
 	
-	public ResultData<Article> doAdd(String title, String body, int typeId, Member member) {
-		repository.doAdd(title, body, typeId, member.getLoginId());
+	public ResultData<Article> doAdd(String title, String body, int typeId, int privateType, Member member) {
+		repository.doAdd(title, body, typeId, privateType, member.getLoginId());
 		int id = repository.getLastInsert();
 		Article article = repository.getArticle(id);
 		

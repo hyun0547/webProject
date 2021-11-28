@@ -58,7 +58,8 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
 	public String doAdd (String title, String body, int typeId, MultipartRequest mr) {
-		ResultData<Article> articleRd = articleService.doAdd(title, body, typeId, rq.getLoginedMember());
+		ResultData<ArticleType> typeRd = articleTypeService.getType(typeId);
+		ResultData<Article> articleRd = articleService.doAdd(title, body, typeId, typeRd.getData1().getPrivateType(), rq.getLoginedMember());
 		Article newArticle = articleRd.getData1();
 		
 		Map<String, MultipartFile> fileMap = mr.getFileMap();

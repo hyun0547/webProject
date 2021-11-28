@@ -78,7 +78,8 @@
 		title = #{title}, 
 		body = #{body}, 
 		memberLoginId = #{memberLoginId},
-		typeId = #{typeId}
+		typeId = #{typeId},
+		privateType = #{privateType}
 	</insert>
 	
 	<delete id="doDelete">
