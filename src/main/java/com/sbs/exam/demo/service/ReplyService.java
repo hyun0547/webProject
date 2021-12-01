@@ -22,4 +22,8 @@ public class ReplyService {
 		return ResultData.from("S-1", "댓글 리스트", replyList.getClass().getSimpleName(), replyList);
 	}
 
+	public void doWriteReply(String body, int relArticleId, String loginedMemberId) {
+		replyRepository.doWriteReply(body, relArticleId, loginedMemberId);
+	}
+
 }

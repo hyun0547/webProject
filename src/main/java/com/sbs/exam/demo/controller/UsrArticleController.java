@@ -30,11 +30,12 @@ public class UsrArticleController {
 	GenFileService genFileService;
 	ReplyService replyService;
 	
-	public UsrArticleController(ArticleService articleService, Rq rq, ArticleTypeService articleTypeService, com.sbs.exam.demo.service.GenFileService genFileService) {
+	public UsrArticleController(ArticleService articleService, Rq rq, ArticleTypeService articleTypeService, GenFileService genFileService, ReplyService replyService) {
 		this.rq = rq;
 		this.articleService = articleService;
 		this.articleTypeService = articleTypeService;
 		this.genFileService = genFileService;
+		this.replyService = replyService;
 	}
 	
 	@RequestMapping("/usr/article/list")
@@ -138,6 +139,7 @@ public class UsrArticleController {
 		if(attachFile != null) {
 			model.addAttribute("attachFileUrl", attachFile.getForPrintDir());
 		}
+		
 		model.addAttribute("replyRd", replyRd);
 		model.addAttribute("afterDeleteUri", afterDeleteUri);
 		model.addAttribute("articleRd", articleRd);
@@ -145,5 +147,12 @@ public class UsrArticleController {
 		return "/usr/article/detail";
 	}
 	
+	@RequestMapping("/usr/article/doWriteReply")
+	@ResponseBody
+	public ResultData<Article> doWriteReply (String body, int relArticleId) {
+		replyService.doWriteReply(body, relArticleId, rq.getLoginedMemberId());
+		System.out.println(relArticleId);
+		return null;
+	}
 	
 }

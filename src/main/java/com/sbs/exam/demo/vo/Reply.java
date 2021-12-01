@@ -12,8 +12,8 @@ public class Reply {
 	String body;
 	String regDate;
 	String updateDate;
-	String writerLoginId;
 	int relArticleId;
 	String delstatus;
 	String delDate;
+	Member writer;
 }

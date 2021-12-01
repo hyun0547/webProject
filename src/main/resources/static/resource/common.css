@@ -44,3 +44,11 @@
 .Cafe24-font{
 	font-family: 'Cafe24Shiningstar';
 }
+.reply{
+	border-top: 2px solid #2AA79B;
+	border-bottom: 2px solid #2AA79B; 
+}
+.reply-box{
+	border-top: 1px solid #2AA79B;
+	border-bottom: 1px solid #2AA79B; 
+}

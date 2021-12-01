@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.sbs.exam.demo.repository.ReplyRepository">
+	
+	<resultMap id="replyJoinWriter" type="Reply">
+	   <id property="id" column="id" />
+	   <result property="body" column="body" />
+	   <result property="regDate" column="regDate" />
+	   <result property="updateDate" column="updateDate" />
+	   <result property="relArticleId" column="relArticleId" />
+	   <result property="delstatus" column="delstatus" />
+	   <result property="delDate" column="delDate" />
+	        <association property="writer"  javaType="Member" >
+	             <id property="loginId"  column="loginId" />
+	             <result property="authLevel"  column="authLevel" />
+	             <result property="nickname"  column="nickname" />
+	             <result property="email"  column="email" />
+	        </association>
+	</resultMap>
+	
+	<insert id="doWriteReply">
+		INSERT INTO `sbs_s_2021_10`.`reply` 
+		( 
+		`body`, 
+		`regDate`, 
+		`updateDate`, 
+		`writerLoginId`, 
+		`relArticleId` 
+		)
+		VALUES
+		( 
+		#{body}, 
+		NOW(), 
+		NOW(), 
+		#{loginedMemberId}, 
+		#{relArticleId} 
+		)
+	</insert>
+	
+	<select id="getReplyList" resultMap="replyJoinWriter">
+		SELECT r.*, m.loginId, m.authLevel, m.nickname FROM reply r JOIN `member` m ON r.writerLoginId = m.loginId WHERE r.relArticleId = 2 ORDER BY r.id DESC
+	</select>
+	
+</mapper>
