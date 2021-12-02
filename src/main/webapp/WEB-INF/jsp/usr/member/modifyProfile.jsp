@@ -24,10 +24,10 @@
 		<form action="/usr/member/doModifyProfile" onsubmit="if(profilePhoto__chk(this) == false){return false;}" method="post" enctype="multipart/form-data">
 			<div class="avatar flex flex-col items-center left-1/2 transform -translate-x-1/2 mb-5">
 				<div>
-		  			<div class="rounded-full w-40 h-40">
-		    			<img src="http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg">
+		  			<div class="rounded-full w-40 h-40 overflow-hidden">
+		    			<img src="${member.profileDir}">
 		  			</div>
-		  			<label class="relative left-3/4 -top-4 cursor-pointer">
+		  			<label class="relative left-36 -top-4 cursor-pointer">
 		  				<i class="fas fa-camera"></i>
 		  				<input type="file" class="hidden" accept="image/*" name="file__member__0__common__profile"/>
 		  				<input type="hidden" value="${member.id}" name="relId"/>

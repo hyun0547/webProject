@@ -11,7 +11,7 @@
 	<section class="container mx-auto mt-5 px-3">
 		<div class="avatar flex flex-col items-center left-1/2 transform -translate-x-1/2 mb-5">
   			<div class="mb-6 rounded-full w-40 h-40">
-    			<img src="http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg">
+    			<img src="${member.profileDir}">
   			</div>
 	  			<span class="text-xl">${member.name}</span>
 		</div>

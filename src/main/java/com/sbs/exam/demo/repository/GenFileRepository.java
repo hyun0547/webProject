@@ -9,7 +9,7 @@ import com.sbs.exam.demo.vo.GenFile;
 public interface GenFileRepository {
 
 	void save(@Param("relTypeCode") String relTypeCode, @Param("relId") int relId, @Param("originFileName") String originFileName, @Param("fileExt") String fileExt, @Param("typeCode") String typeCode, @Param("type2Code") String type2Code,
-			@Param("fileSize") long fileSize, @Param("fileExtTypeCode") String fileExtTypeCode, @Param("fileExtType2Code") String fileExtType2Code, @Param("fileNo") int fileNo, @Param("fileDir") String fileDir);
+			@Param("fileSize") long fileSize, @Param("fileExtTypeCode") String fileExtTypeCode, @Param("fileExtType2Code") String fileExtType2Code, @Param("fileNo") int fileNo, @Param("fileDir") String fileDir, @Param("forPrintDir") String forPrintDir);
 
 	GenFile getFileForRel(@Param("relId") int relId, @Param("relTypeCode") String relTypeCode);
 

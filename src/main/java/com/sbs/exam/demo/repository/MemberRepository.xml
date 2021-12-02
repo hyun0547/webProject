@@ -3,7 +3,7 @@
 
 <mapper
 	namespace="com.sbs.exam.demo.repository.MemberRepository">
-
+	
 	<insert id="doJoin">
 			INSERT INTO `sbs_s_2021_10`.`member` 
 		(
@@ -44,7 +44,7 @@
 	</select>
 	
 	<select id="getMember" resultType="com.sbs.exam.demo.vo.Member">
-		SELECT * FROM `member` WHERE loginId = #{loginId}
+		SELECT m.*, g.forPrintDir profileDir FROM `member` m LEFT OUTER JOIN genFile g ON m.id = g.relId WHERE m.loginId = #{loginId}
 	</select>
 	
 	<select id="loginIdOverlap" resultType="int">

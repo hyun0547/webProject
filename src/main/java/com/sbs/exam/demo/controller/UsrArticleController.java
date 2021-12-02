@@ -70,7 +70,7 @@ public class UsrArticleController {
 		
 		ResultData<ArrayList<String>> fileRd = genFileService.save(fileMap, newArticle.getId());
 		
-		return Utility.jsReplace(articleRd.getMsg(), "/usr/article/detail?id=" + articleRd.getData1().getId());
+		return Utility.jsReplace(articleRd.getMsg(), "/usr/article/detail?articleId=" + articleRd.getData1().getId());
 	}
 	
 	@RequestMapping("/usr/article/showWrite")
@@ -104,7 +104,7 @@ public class UsrArticleController {
 			return Utility.jsHistoryBack(rd.getMsg()); 
 		}
 		
-		return Utility.jsReplace(rd.getMsg(), "/usr/article/detail?id=" + id);
+		return Utility.jsReplace(rd.getMsg(), "/usr/article/detail?articleId=" + id);
 	}
 	
 	@RequestMapping("/usr/article/showModify")

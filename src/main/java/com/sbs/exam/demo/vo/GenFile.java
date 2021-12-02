@@ -24,10 +24,7 @@ public class GenFile {
 	private String fileExt2TypeCode;
 	private int fileNo;
 	private String fileDir;
-	
-	public String getForPrintDir() {
-		return "/gen/" + relTypeCode + "/" + fileDir + "/" + relId + "__" + fileNo + "." + fileExt;
-	}
+	private String forPrintDir;
 
 	public String getFilePath() {
 		return "/" + relTypeCode + "/" + fileDir + "/" + relId + "__" + fileNo + "." + fileExt;

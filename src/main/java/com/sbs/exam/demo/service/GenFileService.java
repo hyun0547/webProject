@@ -50,8 +50,9 @@ public class GenFileService {
 			String fileExtType2Code = Utility.getFileExtType2CodeFromFileName(originFileName.toLowerCase()).toLowerCase();
 			int fileNo = Integer.parseInt(fileInputNameBits[2]);
 			String fileDir = Utility.getNowYearMonthDateStr();
+			String forPrintDir = "/gen/" + relTypeCode + "/" + fileDir + "/" + relId + "__" + fileNo + "." + fileExt;
 			
-			genFileRepository.save(relTypeCode, relId, originFileName, fileExt, typeCode, type2Code, fileSize, fileExtTypeCode, fileExtType2Code, fileNo, fileDir);
+			genFileRepository.save(relTypeCode, relId, originFileName, fileExt, typeCode, type2Code, fileSize, fileExtTypeCode, fileExtType2Code, fileNo, fileDir, forPrintDir);
 			
 			if(fileExt.equals("jpeg")) {
 				fileExt = "jpg";

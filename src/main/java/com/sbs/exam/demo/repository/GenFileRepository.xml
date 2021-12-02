@@ -19,7 +19,8 @@
 		`fileExtTypeCode`, 
 		`fileExtType2Code`, 
 		`fileNo`, 
-		`fileDir`
+		`fileDir`,
+		`forPrintDir`
 		)
 		VALUES
 		(
@@ -35,7 +36,8 @@
 		#{fileExtTypeCode}, 
 		#{fileExtType2Code}, 
 		#{fileNo}, 
-		#{fileDir}
+		#{fileDir},
+		#{forPrintDir}
 		)
 	</insert>
 	
