@@ -40,7 +40,7 @@
 	</insert>
 	
 	<select id="getReplyList" resultMap="replyJoinWriter">
-		SELECT r.*, m.loginId, m.authLevel, m.nickname FROM reply r JOIN `member` m ON r.writerLoginId = m.loginId WHERE r.relArticleId = 2 ORDER BY r.id DESC
+		SELECT r.*, m.loginId, m.authLevel, m.nickname FROM reply r JOIN `member` m ON r.writerLoginId = m.loginId WHERE r.relArticleId = #{relArticleId} ORDER BY r.id DESC
 	</select>
 	
 </mapper>

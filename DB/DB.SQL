@@ -64,7 +64,7 @@ CREATE TABLE genFile(
 );
 
 #댓글
-CREATE TABLE `comment`(
+CREATE TABLE `reply`(
 	id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT, #댓글 번호
 	`body` TEXT NOT NULL, #내용
 	regDate DATETIME NOT NULL,
@@ -185,7 +185,7 @@ INSERT INTO `sbs_s_2021_10`.`article_type`
 
 # 테스트 게시물 대량 생성
 
-insert into `sbs_s_2021_10`.`article` 
+INSERT INTO `sbs_s_2021_10`.`article` 
 	(
 	`regDate`, 
 	`updateDate`, 
@@ -195,10 +195,10 @@ insert into `sbs_s_2021_10`.`article`
 	`typeId`, 
 	`privateType`
 	)
-	values
+	VALUES
 	(
-	now(), 
-	now(), 
+	NOW(), 
+	NOW(), 
 	'title', 
 	'body', 
 	'testUser1', 
@@ -210,11 +210,12 @@ INSERT INTO article
 (
     regDate, updateDate, memberLoginId, typeId, title, `body`
 )
-SELECT NOW(), NOW(), CONCAT('testUser',ROUND(RAND()*1+1)), FLOOR(RAND() * 4 + 1), CONCAT('제목_',floor(RAND()*200+1)), CONCAT('내용_',floor(RAND()*200+1))
+SELECT NOW(), NOW(), CONCAT('testUser',ROUND(RAND()*1+1)), FLOOR(RAND() * 4 + 1), CONCAT('제목_',FLOOR(RAND()*200+1)), CONCAT('내용_',FLOOR(RAND()*200+1))
 FROM article;
 
 
 # 기존 글 공개여부 변경
 UPDATE article SET privateType = 1 WHERE typeId <= 3;
 
-select * from article;
+SELECT * FROM article;
+SELECT * FROM reply;
