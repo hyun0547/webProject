@@ -28,4 +28,8 @@ public class GenFile {
 	public String getForPrintDir() {
 		return "/gen/" + relTypeCode + "/" + fileDir + "/" + relId + "__" + fileNo + "." + fileExt;
 	}
+
+	public String getFilePath() {
+		return "/" + relTypeCode + "/" + fileDir + "/" + relId + "__" + fileNo + "." + fileExt;
+	}
 }

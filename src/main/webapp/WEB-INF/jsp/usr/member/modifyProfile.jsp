@@ -30,6 +30,7 @@
 		  			<label class="relative left-3/4 -top-4 cursor-pointer">
 		  				<i class="fas fa-camera"></i>
 		  				<input type="file" class="hidden" accept="image/*" name="file__member__0__common__profile"/>
+		  				<input type="hidden" value="${member.id}" name="relId"/>
 		  			</label>
 				</div>
 		  			<span class="text-xl">${member.name}</span>

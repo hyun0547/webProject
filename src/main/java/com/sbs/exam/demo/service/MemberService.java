@@ -54,5 +54,11 @@ public class MemberService {
 		return ResultData.from("S-1", "사용 가능한 아이디 입니다.");
 	}
 
+	public ResultData<Member> doModify(String email, String nickname, String cellphoneNo, String loginId) {
+		repository.doModify(email, nickname, cellphoneNo, loginId);
+		Member modifiedMember = repository.getMember(loginId);
+		return ResultData.from("S-1", "회원정보가 수정 되었습니다.", modifiedMember.getClass().getSimpleName(), modifiedMember);
+	}
+
 }
  

@@ -29,6 +29,16 @@
 		)
 	</insert>
 	
+	<update id="doModify">
+		UPDATE `member`
+		SET
+		UPDATEDATE = NOW(), 
+		email=#{email}, 
+		nickname = #{nickname},
+		cellphoneNo = #{cellphoneNo} 
+		WHERE loginId = #{loginId}
+	</update>
+	
 	<select id="getLastInsertId" resultType="int">
 		SELECT LAST_INSERT_ID()
 	</select>

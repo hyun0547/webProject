@@ -39,6 +39,10 @@
 		)
 	</insert>
 	
+	<delete id="delFileData">
+		DELETE FROM genFile WHERE relId = #{relId} AND relTypeCode = #{relType}
+	</delete>
+	
 	<select id="getFileForRel" resultType="GenFile">
 		SELECT * FROM genFile WHERE relId=#{relId} AND relTypeCode=#{relTypeCode}
 	</select>

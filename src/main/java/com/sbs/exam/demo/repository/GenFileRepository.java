@@ -12,4 +12,6 @@ public interface GenFileRepository {
 			@Param("fileSize") long fileSize, @Param("fileExtTypeCode") String fileExtTypeCode, @Param("fileExtType2Code") String fileExtType2Code, @Param("fileNo") int fileNo, @Param("fileDir") String fileDir);
 
 	GenFile getFileForRel(@Param("relId") int relId, @Param("relTypeCode") String relTypeCode);
+
+	void delFileData(@Param("relId") int relId, @Param("relType") String relType);
 }

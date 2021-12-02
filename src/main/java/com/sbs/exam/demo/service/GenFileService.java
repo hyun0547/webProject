@@ -89,4 +89,16 @@ public class GenFileService {
 		return genFileRepository.getFileForRel(relId, relTypeCode);
 	}
 
+	public void delFile(int relId, String relType) {
+		GenFile oldFileData = genFileRepository.getFileForRel(relId, relType);
+		if(oldFileData != null) {
+			String oldFilePath =  genFileDirPath + oldFileData.getFilePath();
+			File oldFile = new File(oldFilePath);
+			if(oldFile.exists()) {
+				genFileRepository.delFileData(relId, relType);
+				oldFile.delete();
+			}
+		}
+	}
+
 }

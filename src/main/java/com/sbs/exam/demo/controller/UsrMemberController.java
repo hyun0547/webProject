@@ -1,13 +1,20 @@
 package com.sbs.exam.demo.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
+
+import com.sbs.exam.demo.service.GenFileService;
 import com.sbs.exam.demo.service.MemberService;
 import com.sbs.exam.demo.util.Utility;
 import com.sbs.exam.demo.vo.Member;
@@ -17,11 +24,13 @@ import com.sbs.exam.demo.vo.Rq;
 
 @Controller
 public class UsrMemberController {
-	MemberService service; 
+	GenFileService genFileService;
+	MemberService memberService; 
 	Rq rq;
 	
-	public UsrMemberController(MemberService service, Rq rq) {
-		this.service = service;
+	public UsrMemberController(MemberService memberService, Rq rq, GenFileService genFileService) {
+		this.genFileService = genFileService;
+		this.memberService = memberService;
 		this.rq = rq;
 	}
 	
@@ -48,7 +57,7 @@ public class UsrMemberController {
 		}
 		
 		if(rd == null) {
-			rd = service.doJoin(newMember);
+			rd = memberService.doJoin(newMember);
 		}
 		
 		if(rd.isSuccess()){
@@ -69,7 +78,7 @@ public class UsrMemberController {
 	@ResponseBody
 	public String getLoginIdDup(String loginId){
 		
-		ResultData<Object> rd = service.getLoginIdDup(loginId);
+		ResultData<Object> rd = memberService.getLoginIdDup(loginId);
 		return rd.getMsg();
 	}
 	
@@ -80,7 +89,7 @@ public class UsrMemberController {
 			return Utility.jsReplace("이미 로그인 되어 있습니다.", "/");
 		};
 		
-		ResultData<Member> rd = service.doLogin(loginId, loginPw);
+		ResultData<Member> rd = memberService.doLogin(loginId, loginPw);
 		
 		if(rd.isFail()) {
 			return Utility.jsHistoryBack(rd.getMsg());
@@ -135,6 +144,23 @@ public class UsrMemberController {
 	@RequestMapping("/usr/member/showModifyProfile")
 	public String showModifyProfile(){
 		return "/usr/member/modifyProfile";
+	}
+	
+	@RequestMapping("/usr/member/doModifyProfile")
+	@ResponseBody
+	public String doModifyProfile(MultipartRequest mr, String email, String nickname, String cellphoneNo, int relId){
+		
+		Map<String, MultipartFile> fileMap = mr.getFileMap();
+		if(fileMap.get("file__member__0__common__profile").getSize() > 0) {
+			genFileService.delFile(relId, "member");
+			genFileService.save(fileMap, relId);
+		}
+		
+		ResultData<Member> modifyRd = memberService.doModify(email, nickname, cellphoneNo, rq.getLoginedMemberId());
+		rq.removeSession("loginedMember");
+		rq.setSession("loginedMember", modifyRd.getData1());
+		
+		return Utility.jsReplace("수정 되었습니다.", "/usr/member/showProfile");
 	}
 	
 }

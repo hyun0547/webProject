@@ -19,4 +19,6 @@ public interface MemberRepository {
 	public int emailOverlap(@Param("email") String email);
 
 	public int userOverlap(@Param("name") String name,@Param("cellphoneNo") String cellphoneNo);
+
+	public void doModify(@Param("email") String email, @Param("nickname") String nickname, @Param("cellphoneNo") String cellphoneNo, @Param("loginId") String loginId);
 }
