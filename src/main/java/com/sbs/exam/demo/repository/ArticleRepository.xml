@@ -17,6 +17,7 @@
 	             <result property="authLevel"  column="authLevel" />
 	             <result property="nickname"  column="nickname" />
 	             <result property="email"  column="email" />
+	             <result property="profileImgUrl"  column="profileImgUrl" />
 	        </association>
 	</resultMap>
 	
@@ -24,23 +25,25 @@
 		SELECT * FROM ARTICLE WHERE ID = #{id}
 	</select>
 	
-	<select id="getArticles" resultType="Article">
+	<select id="getArticles" resultMap="forPrintArticle">
 		SELECT * 
-		FROM ARTICLE
+		FROM article a
+		JOIN `member` m
+		ON a.memberLoginId = m.loginId
 		<where>
 			privateType = #{privateType}
 			<if test="typeId != 0">
-				AND typeId=#{typeId}
+				AND a.typeId=#{typeId}
 			</if>
 			<if test="searchKeyword != null">
-				(AND (TITLE LIKE CONCAT('%', #{searchKeyword}, '%')  
-				OR BODY LIKE CONCAT('%', #{searchKeyword}, '%')))
+				(AND (a.title LIKE CONCAT('%', #{searchKeyword}, '%')  
+				OR a.body LIKE CONCAT('%', #{searchKeyword}, '%')))
 			</if>
 			<if test="privateType == 1">
-				AND memberLoginId = #{memberLoginId}
+				AND a.memberLoginId = #{memberLoginId}
 			</if>
 		</where>
-		ORDER BY ID DESC
+		ORDER BY a.id DESC
 		LIMIT #{limitStart}, #{limitRange}
 	</select>
 	
@@ -65,7 +68,7 @@
 	</select>
 	
 	<select id="getForPrintArticle" resultMap="forPrintArticle">
-		SELECT a.*, m.loginId, m.email, m.authLevel, m.name, m.nickname 
+		SELECT a.*, m.loginId, m.email, m.authLevel, m.name, m.nickname, m.profileImgUrl
 		FROM article a LEFT OUTER JOIN `member` m 
 		ON a.memberLoginId = m.loginId
 		WHERE a.id=#{id};

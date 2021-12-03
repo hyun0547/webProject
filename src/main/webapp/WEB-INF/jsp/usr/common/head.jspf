@@ -55,7 +55,7 @@
 	      	<li><a href="/usr/member/showJoin" class="h-full block flex items-center px-3 mx-3 btn-text-link"><span>회원가입</span></a></li>
 	      </c:if>
 	      <c:if test="${rq.isLogined()}">
-	      	<li><a href="/usr/member/showProfile" class="h-full block flex items-center px-3 mx-3 btn-text-link"><img class="w-10 h-10 rounded-full mr-1" alt="logo" src="${rq.loginedMember.profileDir}"><span>${rq.loginedMemberId}</span></a></li>
+	      	<li><a href="/usr/member/showProfile" class="h-full block flex items-center px-3 mx-3 btn-text-link"><img class="w-10 h-10 rounded-full mr-1" alt="logo" src="${rq.loginedMember.profileImgUrl}"><span>${rq.loginedMemberId}</span></a></li>
 	      	<li><a href="/usr/member/logout" class="h-full block flex items-center px-3 mx-3 btn-text-link"><span>로그아웃</span></a></li>
 	      </c:if>
 	    </ul>

@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartRequest;
 import com.sbs.exam.demo.service.GenFileService;
 import com.sbs.exam.demo.service.MemberService;
 import com.sbs.exam.demo.util.Utility;
+import com.sbs.exam.demo.vo.GenFile;
 import com.sbs.exam.demo.vo.Member;
 import com.sbs.exam.demo.vo.ResultData;
 import com.sbs.exam.demo.vo.Rq;
@@ -156,7 +157,8 @@ public class UsrMemberController {
 			genFileService.save(fileMap, relId);
 		}
 		
-		ResultData<Member> modifyRd = memberService.doModify(email, nickname, cellphoneNo, rq.getLoginedMemberId());
+		GenFile profileImg = genFileService.getFileForRel(relId, "member");
+		ResultData<Member> modifyRd = memberService.doModify(email, nickname, cellphoneNo, profileImg.getForPrintDir(), rq.getLoginedMemberId());
 		rq.removeSession("loginedMember");
 		rq.setSession("loginedMember", modifyRd.getData1());
 		

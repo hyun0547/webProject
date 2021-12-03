@@ -1,7 +1,5 @@
 package com.sbs.exam.demo.vo;
 
-import com.sbs.exam.demo.util.Utility;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,7 +20,7 @@ public class Member {
 	String email;
 	int delStatus;
 	String delDate;
-	String profileDir;
+	String profileImgUrl;
 
 }
  

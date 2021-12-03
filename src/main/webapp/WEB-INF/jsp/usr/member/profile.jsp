@@ -11,7 +11,7 @@
 	<section class="container mx-auto mt-5 px-3">
 		<div class="avatar flex flex-col items-center left-1/2 transform -translate-x-1/2 mb-5">
   			<div class="mb-6 rounded-full w-40 h-40">
-    			<img src="${member.profileDir}">
+    			<img src="${member.profileImgUrl}">
   			</div>
 	  			<span class="text-xl">${member.name}</span>
 		</div>

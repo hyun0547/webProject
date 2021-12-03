@@ -27,6 +27,7 @@ CREATE TABLE `member` (
     `nickname` VARCHAR(20) NOT NULL,
     cellphoneNo VARCHAR(20) NOT NULL,
     email VARCHAR(50) NOT NULL,
+    profileImgUrl VARCHAR(30) NOT NULL DEFAULT '/basicProfile.jpg',
     delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '탈퇴여부(0=탈퇴전,1=탈퇴)',
     delDate DATETIME COMMENT '탈퇴날짜'
 );
@@ -220,5 +221,5 @@ UPDATE article SET privateType = 1 WHERE typeId <= 3;
 
 SELECT * FROM article;
 SELECT * FROM reply;
-select * from genfile;
-select * from `member`;
+SELECT * FROM genfile;
+SELECT * FROM `member`;

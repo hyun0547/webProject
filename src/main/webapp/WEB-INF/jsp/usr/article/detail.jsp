@@ -13,14 +13,13 @@
 		<div class="flex justify-between items-center">
 			<h1 class="text-2xl">${article.title}</h1>
 			<div class="flex items-center">
-				<c:if test="${article.extra__actorAuth}">
-					<a class="mr-3 btn-text-link" href="/usr/article/showModify?id=${article.id}">수정</a>
-				</c:if>
-				<c:if test="${article.extra__actorAuth}">
-					<a class="btn-text-link" onclick="if(confirm('삭제 하시겠습니까?') == false){return false;}" href="/usr/article/doDelete?id=${article.id}&afterDeleteUri=${afterDeleteUri}">삭제</a>
-				</c:if>
-				<a class="hover:text-gray-500 mx-2" href="#">${article.member.nickname}</a> 
-				<div class="badge badge-accent badge-outline">${article.member.authLevel}</div>
+				<div class="mx-2 flex items-center">
+					<a class="hover:text-gray-500 flex items-center mx-1" href="#">
+						<img class="w-8 h-8 rounded-full mr-1" alt="logo" src="${article.member.profileImgUrl}">
+						${article.member.nickname}
+					</a> 
+					<div class="badge badge-accent badge-outline">${article.member.authLevel}</div>
+				</div>
 			</div>
 		</div>
 		<div class="h-1 bg-green-600 mt-5"></div>
@@ -33,6 +32,12 @@
 			</c:if>
 		</div>
 		<div class="h-1 bg-green-600 mt-5"></div>
+		<c:if test="${article.extra__actorAuth}">
+			<div class="text-right mt-3">
+				<a class="mr-3 btn-text-link" href="/usr/article/showModify?id=${article.id}">수정</a>
+				<a class="btn-text-link" onclick="if(confirm('삭제 하시겠습니까?') == false){return false;}" href="/usr/article/doDelete?id=${article.id}&afterDeleteUri=${afterDeleteUri}">삭제</a>
+			</div>
+		</c:if>
 	</section>
 	<section class="container mx-auto mt-5 px-3">
 		<div class="reply">
@@ -41,7 +46,7 @@
 				<div class="reply-box">
 					<div class="flex items-center mt-2">
 						<a class="hover:text-gray-500 mx-1 flex items-center" href="#">
-							<img class="w-8 h-8 rounded-full mr-1" alt="logo" src="${reply.writer.profileDir}">
+							<img class="w-8 h-8 rounded-full mr-1" alt="logo" src="${reply.writer.profileImgUrl}">
 							${reply.writer.nickname}
 						</a>
 						<div class="badge badge-accent badge-outline">${reply.writer.authLevel}</div>

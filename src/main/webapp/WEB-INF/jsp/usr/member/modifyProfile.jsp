@@ -25,7 +25,7 @@
 			<div class="avatar flex flex-col items-center left-1/2 transform -translate-x-1/2 mb-5">
 				<div>
 		  			<div class="rounded-full w-40 h-40 overflow-hidden">
-		    			<img src="${member.profileDir}">
+		    			<img src="${member.profileImgUrl}">
 		  			</div>
 		  			<label class="relative left-36 -top-4 cursor-pointer">
 		  				<i class="fas fa-camera"></i>
