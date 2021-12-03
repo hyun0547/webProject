@@ -149,10 +149,10 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/doWriteReply")
 	@ResponseBody
-	public ResultData<Article> doWriteReply (String body, int relArticleId) {
+	public String doWriteReply (String body, int relArticleId) {
 		
 		replyService.doWriteReply(body, relArticleId, rq.getLoginedMemberId());
-		return null;
+		return Utility.jsReplace("", "/usr/article/detail?articleId=" + relArticleId);
 	}
 	
 }
