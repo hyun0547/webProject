@@ -60,6 +60,7 @@ CREATE TABLE genFile(
  fileExtType2Code VARCHAR(10) NOT NULL, # 파일규격2코드
  fileNo SMALLINT(2) UNSIGNED NOT NULL, # 파일 번호
  fileDir VARCHAR(20) NOT NULL, # 파일이 저장되는 폴더명
+ forPrintDir VARCHAR(30) NOT NULL, # 이미지를 출력하기 위한 주소
  KEY relId (relId,relTypeCode,typeCode,type2Code,fileNo)
 );
 
@@ -219,3 +220,5 @@ UPDATE article SET privateType = 1 WHERE typeId <= 3;
 
 SELECT * FROM article;
 SELECT * FROM reply;
+select * from genfile;
+select * from `member`;
