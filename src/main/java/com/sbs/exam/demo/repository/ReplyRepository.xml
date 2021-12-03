@@ -17,6 +17,7 @@
 	             <result property="authLevel"  column="authLevel" />
 	             <result property="nickname"  column="nickname" />
 	             <result property="email"  column="email" />
+	             <result property="profileDir"  column="profileDir" />
 	        </association>
 	</resultMap>
 	
@@ -40,7 +41,11 @@
 	</insert>
 	
 	<select id="getReplyList" resultMap="replyJoinWriter">
-		SELECT r.*, m.loginId, m.authLevel, m.nickname FROM reply r JOIN `member` m ON r.writerLoginId = m.loginId WHERE r.relArticleId = #{relArticleId} ORDER BY r.id DESC
+		SELECT r.*, mg.loginId, mg.authLevel, mg.nickname, IFNULL(mg.forPrintDir, '/basicProfile.jpg') profileDir
+		FROM reply r 
+		JOIN (SELECT m.*, g.forPrintDir FROM `member` m LEFT OUTER JOIN genfile g ON m.id=g.relId) mg 
+		ON r.writerLoginId = mg.loginId 
+		WHERE r.relArticleId = #{relArticleId} ORDER BY r.id DESC;
 	</select>
 	
 </mapper>

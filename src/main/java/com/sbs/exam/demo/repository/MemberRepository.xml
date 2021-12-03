@@ -44,7 +44,7 @@
 	</select>
 	
 	<select id="getMember" resultType="com.sbs.exam.demo.vo.Member">
-		SELECT m.*, g.forPrintDir profileDir FROM `member` m LEFT OUTER JOIN genFile g ON m.id = g.relId WHERE m.loginId = #{loginId}
+		SELECT m.*, IFNULL(g.forPrintDir, '/basicProfile.jpg') profileDir FROM `member` m LEFT OUTER JOIN genFile g ON m.id = g.relId WHERE m.loginId = #{loginId}
 	</select>
 	
 	<select id="loginIdOverlap" resultType="int">

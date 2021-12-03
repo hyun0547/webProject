@@ -23,7 +23,7 @@
 				<div class="badge badge-accent badge-outline">${article.member.authLevel}</div>
 			</div>
 		</div>
-		<div class="h-1 bg-gray-200 mt-5"></div>
+		<div class="h-1 bg-green-600 mt-5"></div>
 		<div class="mt-10 px-10">
 			${article.body}
 			<c:if test="${attachFileUrl != null }">
@@ -32,14 +32,20 @@
 				</div>
 			</c:if>
 		</div>
-		<div class="h-1 bg-gray-200 mt-5"></div>
+		<div class="h-1 bg-green-600 mt-5"></div>
 	</section>
 	<section class="container mx-auto mt-5 px-3">
 		<div class="reply">
 			<span>댓글 ${replies.size()}</span>
 			<c:forEach var="reply" items="${replies}">
 				<div class="reply-box">
-					<a class="hover:text-gray-500 mx-2" href="#">${reply.writer.nickname}</a><div class="badge badge-accent badge-outline">${reply.writer.authLevel}</div>
+					<div class="flex items-center mt-2">
+						<a class="hover:text-gray-500 mx-1 flex items-center" href="#">
+							<img class="w-8 h-8 rounded-full mr-1" alt="logo" src="${reply.writer.profileDir}">
+							${reply.writer.nickname}
+						</a>
+						<div class="badge badge-accent badge-outline">${reply.writer.authLevel}</div>
+					</div>
 					<p class="p-3">${reply.body}</p>
 				</div>
 			</c:forEach>
