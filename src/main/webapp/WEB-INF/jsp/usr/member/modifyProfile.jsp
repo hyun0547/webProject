@@ -7,30 +7,19 @@
 <c:set var="pageTitle" value="Profile"/>
 
 <%@ include file="../common/head.jspf" %>
-<script>
-	function profilePhoto__chk(form){
-		var file = form.file__member__0__common__profile;
-		if(file.value){
-			if(file.files[0].type.startsWith("image") == false){
-				alert("잘못된 형식의 프로필 이미지 입니다.")
-				return false;
-			}
-		}
-	}
-</script>
 
 <c:set var="member" value="${rq.loginedMember}"/>
 	<section class="container mx-auto mt-5 px-3">
-		<form action="/usr/member/doModifyProfile" onsubmit="if(profilePhoto__chk(this) == false){return false;}" method="post" enctype="multipart/form-data">
+		<form action="/usr/member/doModifyProfile" onsubmit="if(profilePhoto__chk(this) == false){return false;}" method="post" enctype="multipart/form-data" class="profileForm">
 			<div class="avatar flex flex-col items-center left-1/2 transform -translate-x-1/2 mb-5">
 				<div>
 		  			<div class="rounded-full w-40 h-40 overflow-hidden">
-		    			<img src="${member.profileImgUrl}">
+		    			<img class="profileImg" src="${member.profileImgUrl}">
 		  			</div>
 		  			<label class="relative left-36 -top-4 cursor-pointer">
 		  				<i class="fas fa-camera"></i>
-		  				<input type="file" class="hidden" accept="image/*" name="file__member__0__common__profile"/>
-		  				<input type="hidden" value="${member.id}" name="relId"/>
+		  				<input type="file" class="hidden profileImgFile" accept="image/*" name="file__member__0__common__profile"/>
+		  				<input type="hidden" class="relId" value="${member.id}" name="relId"/>
 		  			</label>
 				</div>
 		  			<span class="text-xl">${member.name}</span>
@@ -46,4 +35,40 @@
 			</div> 
 		</form>
 	</section>
+	
+<script>
+	$(".profileImgFile").change(function (event) {         
+	    // Get form         
+	    var form = $('.profileForm')[0];  	    
+	    // Create an FormData object          
+	    var data = new FormData(form);  	   
+	    
+	    $.ajax({             
+	    	type: "POST",          
+	        enctype: 'multipart/form-data',  
+	        url: "/usr/member/changeProfileImg",        
+	        data: data,          
+	        processData: false,    
+	        contentType: false,      
+	        cache: false,
+	        success: function (data) {
+		        $(".profileImg").attr("src", data + "?time=" + new Date().getTime());
+	        },          
+	        error: function (e) {  
+	        	console.log("ERROR : ", e);     
+	        }
+		});  
+	});
+
+
+	function profilePhoto__chk(form){
+		var file = form.file__member__0__common__profile;
+		if(file.value){
+			if(file.files[0].type.startsWith("image") == false){
+				alert("잘못된 형식의 프로필 이미지 입니다.")
+				return false;
+			}
+		}
+	}
+</script>
 <%@ include file="../common/foot.jspf" %>

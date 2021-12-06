@@ -1,11 +1,8 @@
 package com.sbs.exam.demo.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
-import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
-
 import com.sbs.exam.demo.service.GenFileService;
 import com.sbs.exam.demo.service.MemberService;
 import com.sbs.exam.demo.util.Utility;
@@ -151,6 +147,18 @@ public class UsrMemberController {
 	@ResponseBody
 	public String doModifyProfile(MultipartRequest mr, String email, String nickname, String cellphoneNo, int relId){
 		
+		String profileImgUrl = changeProfileImg(mr, relId);
+		
+		ResultData<Member> modifyRd = memberService.doModify(email, nickname, cellphoneNo, profileImgUrl, rq.getLoginedMemberId());
+		rq.removeSession("loginedMember");
+		rq.setSession("loginedMember", modifyRd.getData1());
+		
+		return Utility.jsReplace("수정 되었습니다.", "/usr/member/showProfile");
+	}
+	
+	@RequestMapping("/usr/member/changeProfileImg")
+	@ResponseBody
+	public String changeProfileImg(MultipartRequest mr, int relId){
 		Map<String, MultipartFile> fileMap = mr.getFileMap();
 		if(fileMap.get("file__member__0__common__profile").getSize() > 0) {
 			genFileService.delFile(relId, "member");
@@ -158,11 +166,6 @@ public class UsrMemberController {
 		}
 		
 		GenFile profileImg = genFileService.getFileForRel(relId, "member");
-		ResultData<Member> modifyRd = memberService.doModify(email, nickname, cellphoneNo, profileImg.getForPrintDir(), rq.getLoginedMemberId());
-		rq.removeSession("loginedMember");
-		rq.setSession("loginedMember", modifyRd.getData1());
-		
-		return Utility.jsReplace("수정 되었습니다.", "/usr/member/showProfile");
+		return profileImg.getForPrintDir();
 	}
-	
 }
