@@ -4,23 +4,12 @@
 <c:set var="pageTitle" value="게시물 작성"/>
 
 <%@ include file="../common/head.jspf" %>
-<script>
-	function articleAdd__chk(form){
-		var maxSizeMb = 50;
-		var maxSize = maxSizeMb * 1024 * 1024; 
-		var file = form.file__article__0__common__attachment;
-		
-		if(file.value){
-			if(file.files[0].size > maxSize){
-				alert(maxSizeMb + "MB이하의 파일만 업로드 할 수 있습니다.");
-				return false;
-			}
-		}
-	}
-</script>
-<section class="mx-auto max-w-2xl">
+
+<%@ include file="../../common/toastUI.jspf" %>
+
+<section class="mx-auto container px-10 mb-10">
 	<div>
-		<form class="flex flex-col mt-40" onsubmit="if(articleAdd__chk(this) == false){return false;}" action="/usr/article/doWrite" method="post" enctype="multipart/form-data">
+		<form class="flex flex-col mt-20" onsubmit="if(articleAdd__chk(this) == false){return false;}" action="/usr/article/doWrite" method="post" enctype="multipart/form-data">
 			<div class="flex justify-between items-end mb-3">
 				<span>제목</span>
 				<select class="select select-bordered select-sm select-accent w-full max-w-xs" name="typeId">
@@ -31,7 +20,9 @@
 			</div>
 			<input type="text" name="title" class="input input-accent input-bordered mb-5" value=""/>
 			<span class="mb-2">내용</span>
-			<textarea class="textarea h-24 textarea-bordered textarea-accent mb-5 h-60" name="body"></textarea>
+			<input type="hidden" name=body />
+			<div class="toast-ui-editor mb-4">
+			</div>
 			<div class="flex justify-between items-center">
 				<label
 				  class="
@@ -62,5 +53,7 @@
 			</div>
 		</form>
 	</div>
+	
+	
 </section>
 <%@ include file="../common/foot.jspf" %>

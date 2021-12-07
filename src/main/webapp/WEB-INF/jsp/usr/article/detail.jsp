@@ -7,6 +7,8 @@
 <c:set var="pageTitle" value="게시물"/>
 
 <%@ include file="../common/head.jspf" %>
+
+
 <c:set var="article" value="${articleRd.data1}"/>
 <c:set var="replies" value="${replyRd.data1}"/>
 	<section class="container mx-auto mt-5 px-3">
