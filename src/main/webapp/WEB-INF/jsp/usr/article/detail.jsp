@@ -8,6 +8,8 @@
 
 <%@ include file="../common/head.jspf" %>
 
+<%@ include file="../../common/toastUI.jspf" %>
+
 
 <c:set var="article" value="${articleRd.data1}"/>
 <c:set var="replies" value="${replyRd.data1}"/>
@@ -26,7 +28,11 @@
 		</div>
 		<div class="h-1 bg-green-600 mt-5"></div>
 		<div class="mt-10 px-10">
-			${article.body}
+			<div class="toast-ui-viewer">
+  				<script type="text/x-template">
+				${article.body}
+				</script>
+			</div>
 			<c:if test="${attachFileUrl != null }">
 				<div class="flex w-1/2">
 					<img class="w-full" src="${attachFileUrl}" alt="" />
