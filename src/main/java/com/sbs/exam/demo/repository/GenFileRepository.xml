@@ -5,7 +5,7 @@
 	namespace="com.sbs.exam.demo.repository.GenFileRepository">
 
 	<insert id="save">
-		INSERT INTO `sbs_s_2021_10`.`genfile` 
+		INSERT INTO `sbs_s_2021_10`.`genFile` 
 		(
 		`regDate`, 
 		`updateDate`, 

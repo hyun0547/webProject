@@ -85,8 +85,8 @@
 	</insert>
 	
 	<delete id="doDelete">
-		DELETE FROM ARTICLE 
-		WHERE ID = #{id}
+		DELETE FROM article 
+		WHERE id = #{id}
 	</delete>
 	
 	<update id="doModify">
