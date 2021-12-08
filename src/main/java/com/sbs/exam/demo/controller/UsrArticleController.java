@@ -40,6 +40,9 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/list")
 	public String getArticles (Model model, int typeId, String searchKeyword, @RequestParam(defaultValue = "1") int curPage) {
+		if(Utility.checkNull(searchKeyword)) {
+			searchKeyword = null;
+		}
 		
 		ResultData<ArticleType> typeRd = articleTypeService.getType(typeId);
 		int privateType = typeRd.getData1().getPrivateType();
@@ -48,6 +51,7 @@ public class UsrArticleController {
 		ResultData<Integer> allArticles = articleService.getAllArticleCount(typeId, privateType, rq.getLoginedMemberId());
 		int allArticlesCount = allArticles.getData1();
 		int allPages = allArticlesCount % 10 == 0 ? allArticlesCount / 10 : allArticlesCount / 10 + 1;
+		
 		
 		model.addAttribute("allArticle", allArticles);
 		model.addAttribute("allPages", allPages);

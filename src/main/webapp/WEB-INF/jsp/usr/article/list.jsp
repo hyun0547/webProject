@@ -45,12 +45,12 @@
 					<th class="text-right">작성일</th>
 				</tr>
 				<c:forEach var="article" items="${articleRd.data1}">
-					<tr>
+					<tr class="${article.memberLoginId.equals('admin') ? 'bg-gray-200' : 'bg-white'}">
 						<td class="text-center">${article.id}</td>
 						<td class="text-center btn-text-link"><a href="/usr/article/detail?articleId=${article.id}&searchKeyword=${searchKeyword}">${article.title}</a></td>
 						<td class="text-right">${article.member.nickname}</td>
 						<td class="text-right">
-							<fmt:parseDate var="parsedDate" value="${article.regDate}" pattern="yyyy-mm-dd HH:mm:ss"/>
+							<fmt:parseDate var="parsedDate" value="${article.regDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 							<fmt:formatDate var="newFormattedDateString" value="${parsedDate}" pattern="yyyy/MM/dd"/> 
 							${newFormattedDateString}
 						</td>

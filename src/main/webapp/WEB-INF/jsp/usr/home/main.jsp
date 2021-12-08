@@ -4,7 +4,7 @@
 
 <link rel="stylesheet" href="/resource/main/style/style.css"/>
 
-<c:set var="pageTitle" value="Record Your Day"/>
+<c:set var="pageTitle" value="당신의 하루를 남겨보세요"/>
 
 <%@ include file="../common/head.jspf" %>
 <section>

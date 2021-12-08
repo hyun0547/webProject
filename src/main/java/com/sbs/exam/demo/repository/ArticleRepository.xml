@@ -36,14 +36,13 @@
 				AND a.typeId=#{typeId}
 			</if>
 			<if test="searchKeyword != null">
-				(AND (a.title LIKE CONCAT('%', #{searchKeyword}, '%')  
-				OR a.body LIKE CONCAT('%', #{searchKeyword}, '%')))
+				AND CONCAT(`title`, `body`) LIKE CONCAT('%', #{searchKeyword}, '%')
 			</if>
 			<if test="privateType == 1">
 				AND a.memberLoginId = #{memberLoginId}
 			</if>
 		</where>
-		ORDER BY a.id DESC
+		ORDER BY a.memberLoginId != 'admin', a.id DESC
 		LIMIT #{limitStart}, #{limitRange}
 	</select>
 	
