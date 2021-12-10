@@ -1,5 +1,11 @@
 mybatis:
   type-aliases-package: com.sbs.exam.demo.vo
+logging:
+  file:
+    max-size: 500MB
+    max-history: 10
+  level:
+    root: info
 ---
 spring:
   mvc:
@@ -17,6 +23,7 @@ spring:
       on-profile: production
 custom:
   genFileDirPath: home/hyunsu/webproject-file
+logging:  file:    path: /home/ryd/logs
 ---
 server:
   port: 8081
@@ -33,3 +40,6 @@ spring:
     password:  config:    activate:      on-profile: local
 custom:
   genFileDirPath: C:/hyunsu/webproject-file
+logging:
+  file:
+    path: /logs

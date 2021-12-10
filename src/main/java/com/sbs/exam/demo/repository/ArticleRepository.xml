@@ -22,7 +22,7 @@
 	</resultMap>
 	
 	<select id="getArticle" resultType="Article">
-		SELECT * FROM ARTICLE WHERE ID = #{id}
+		SELECT * FROM article WHERE id = #{id}
 	</select>
 	
 	<select id="getArticles" resultMap="forPrintArticle">
@@ -74,7 +74,7 @@
 	</select>
 	
 	<insert id="doAdd">
-		INSERT INTO ARTICLE 
+		INSERT INTO article 
 		SET regDate = NOW(), 
 		updateDate = NOW(), 
 		title = #{title}, 
@@ -90,7 +90,7 @@
 	</delete>
 	
 	<update id="doModify">
-		UPDATE ARTICLE
+		UPDATE article
 		<set>
 			<if test="title != null and title != '' or body != null and body != ''">
 				UPDATEDATE = NOW(), 
