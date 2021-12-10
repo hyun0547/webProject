@@ -22,7 +22,7 @@ spring:
     activate:
       on-profile: production
 custom:
-  genFileDirPath: home/hyunsu/webproject-file
+  genFileDirPath: /upload/ryd/ryd-file
 logging:  file:    path: /home/ryd/logs
 ---
 server:
