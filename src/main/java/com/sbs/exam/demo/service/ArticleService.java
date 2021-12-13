@@ -30,8 +30,11 @@ public class ArticleService {
 		return ResultData.from("S-1", "전체 게시물 입니다.", articles.getClass().getSimpleName(), articles);
 	}
 	
-	public ResultData<Integer> getAllArticleCount(int typeId, int privateType, String loginedMemberId){
-		return ResultData.from("S-1", "전체 게시글 수", "Integer", repository.getAllArticleCount(typeId, privateType, loginedMemberId));
+	public ResultData<Integer> getAllArticleCount(int typeId, int privateType, String loginedMemberId, String searchKeyword){
+		if(Utility.checkNull(searchKeyword)) {
+			searchKeyword = null;
+		}
+		return ResultData.from("S-1", "전체 게시글 수", "Integer", repository.getAllArticleCount(typeId, privateType, loginedMemberId, searchKeyword));
 	}
 	
 	

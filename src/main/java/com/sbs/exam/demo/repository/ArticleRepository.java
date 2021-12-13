@@ -15,7 +15,7 @@ public interface ArticleRepository {
 		
 		public ArrayList<Article> getArticles(@Param("typeId") int typeId, @Param("searchKeyword") String searchKeyword, @Param("limitStart") int limitStart, @Param("limitRange") int limitRange, @Param("privateType") int privateType, @Param("memberLoginId") String memberLoginId);
 		
-		public int getAllArticleCount(@Param("typeId") int typeId, @Param("privateType") int privateType, @Param("loginedMemberId") String loginedMemberId);
+		public int getAllArticleCount(@Param("typeId") int typeId, @Param("privateType") int privateType, @Param("loginedMemberId") String loginedMemberId, @Param("searchKeyword") String searchKeyword);
 		
 		public int getLastInsert();
 		

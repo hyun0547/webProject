@@ -48,7 +48,7 @@ public class UsrArticleController {
 		int privateType = typeRd.getData1().getPrivateType();
 		ResultData<ArrayList<Article>> articleRd = articleService.getArticles(rq.getLoginedMemberId(), typeId, searchKeyword, curPage, privateType);
 		
-		ResultData<Integer> allArticles = articleService.getAllArticleCount(typeId, privateType, rq.getLoginedMemberId());
+		ResultData<Integer> allArticles = articleService.getAllArticleCount(typeId, privateType, rq.getLoginedMemberId(), searchKeyword);
 		int allArticlesCount = allArticles.getData1();
 		int allPages = allArticlesCount % 10 == 0 ? allArticlesCount / 10 : allArticlesCount / 10 + 1;
 		

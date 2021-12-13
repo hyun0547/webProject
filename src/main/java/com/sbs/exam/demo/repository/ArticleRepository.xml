@@ -57,6 +57,9 @@
 			<if test="privateType == 1">
 				AND memberLoginId = #{loginedMemberId}
 			</if>
+			<if test="searchKeyword != null">
+				AND CONCAT(`title`, `body`) LIKE CONCAT('%', #{searchKeyword}, '%')
+			</if>
 		</where>
 		
 		
