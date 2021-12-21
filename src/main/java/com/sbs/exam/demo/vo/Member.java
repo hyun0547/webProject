@@ -1,5 +1,7 @@
 package com.sbs.exam.demo.vo;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +23,10 @@ public class Member {
 	int delStatus;
 	String delDate;
 	String profileImgUrl;
+	
+	public String getProfileImgUrl() {
+		return profileImgUrl + "?time=" + new Date().getTime();
+	}
 
 }
  
