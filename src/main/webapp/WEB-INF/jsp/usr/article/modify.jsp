@@ -4,13 +4,54 @@
 <c:set var="pageTitle" value="게시물 수정"/>
 
 <%@ include file="../common/head.jspf" %>
-<section class="mx-auto max-w-2xl">
+
+<%@ include file="../../common/toastUI.jspf" %>
+<section class="mx-auto container px-10 mb-10">
 	<div>
 		<form class="flex flex-col mt-40" action="/usr/article/doModify">
-			<input type="text" name="title" class="input input-accent input-bordered mb-5" value="${rd.data1.title}"/>
-			<textarea class="textarea h-24 textarea-bordered textarea-accent mb-5 h-60" name="body">${rd.data1.body}</textarea>
+			<div class="flex justify-between items-end mb-3">
+				<span>제목</span>
+				<select class="select select-bordered select-sm select-accent w-full max-w-xs" name="typeId">
+					<c:forEach var="type" items="${typeRd.data1}">
+  						<option value="${type.id}">${type.typeName}</option> 
+					</c:forEach>
+				</select>
+			</div>
 			<input type="hidden" name="id" value="${rd.data1.id}" />
-			<button class="btn btn-ghost w-28">수정 완료</button>
+			<input type="text" name="title" class="input input-accent input-bordered mb-5" value="${rd.data1.title}"/>
+			<span class="mb-2">내용</span>
+			<input type="hidden" name=body />
+			<div class="toast-ui-editor mb-4">
+				${rd.data1.body}
+			</div>
+			<div class="flex justify-between items-center">
+				<label
+				  class="
+				    w-40
+				    flex flex-col
+				    items-center
+				    px-4
+				    py-4
+				    bg-white
+				    rounded-md
+				    shadow-md
+				    tracking-wide
+				    uppercase
+				    border border-blue
+				    cursor-pointer
+				    hover:bg-purple-600 hover:text-white
+				    text-purple-600
+				    ease-linear
+				    transition-all
+				    duration-150
+				  "
+				>
+				  <i class="fas fa-cloud-upload-alt fa-2x"></i>
+				  <span class="mt-2 text-base leading-normal">첨부 이미지</span>
+				  <input class="hidden" type="file" name="file__article__0__common__attachment"/>
+				</label>
+				<button class="btn btn-ghost w-28">수정 완료</button>
+			</div>
 		</form>
 	</div>
 </section>

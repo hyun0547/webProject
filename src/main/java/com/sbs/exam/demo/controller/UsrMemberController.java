@@ -96,8 +96,6 @@ public class UsrMemberController {
 		
 		rq.setSession("loginedMember", loginedMember);
 		
-		System.out.println(afterLoginUri);
-		
 		if(Utility.checkNull(afterLoginUri)) {
 			afterLoginUri = "/";
 		}

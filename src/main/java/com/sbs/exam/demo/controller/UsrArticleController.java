@@ -114,12 +114,14 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/showModify")
 	public String showModify (Model model, int id) {
 		ResultData<Article> rd = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
+		ResultData<ArrayList<ArticleType>> typeRd = articleTypeService.getTypes();
 		
 		if(!rd.getData1().isExtra__actorAuth()) {
 			return Utility.jsHistoryBack(rd.getMsg()); 
 		}
 		
 		model.addAttribute("rd", rd);
+		model.addAttribute("typeRd", typeRd);
 		
 		return "/usr/article/modify";
 	}
